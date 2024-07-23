@@ -308,7 +308,7 @@ export async function updateStore(countryCode: string) {
         body: JSON.stringify({
           columns: columns,
           ignore_unknown_fields: false,
-          options: { lang: codeList[countryCode].name },
+          options: { lang: "ko" },
           range: [0, 99999],
           sort: { sortBy: "market_cap_basic", sortOrder: "desc" },
           symbols: {},

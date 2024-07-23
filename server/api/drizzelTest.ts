@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
   // for query purposes
   const queryClient = postgres(url);
   const db = drizzle(queryClient);
-  const data = await db.select().from("stock");
+  const data = await db.select().from(pgTableKrSeoul);
 
   return data;
 });

@@ -1,6 +1,6 @@
 // 1시간 뒤 5% 이상 오를 수 있는지 분석
 
-import * as tf from "@tensorflow/tfjs-node";
+import * as tf from "@tensorflow/tfjs";
 
 // supabase 데이터 읽기
 export const fetchData1Hour5Percent = async (): Promise<any[]> => {
