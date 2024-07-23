@@ -10,7 +10,14 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@tensorflow/tfjs": "^4.20.0",
+    "drizzle-orm": "^0.29.5",
     "nuxt": "^3.12.4",
+    "postgres": "^3.4.4",
     "vue": "latest"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.23.0",
+    "nuxt-scheduler": "^0.1.9"
   }
 }
