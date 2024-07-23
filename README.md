@@ -1,75 +1,20 @@
-# Nuxt 3 Minimal Starter
+# stock server
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+목적
+
+- 갤럭시 s7 에 데이터 수집
+- 학습
+- 모델 저장
+- api 제공
 
 ## Setup
 
-Make sure to install the dependencies:
+서버 초기 환경 설정
 
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+npx nuxi@latest init stock_server
+npm i drizzel-orm postgres
+npm i -D drizzel-kit
+npm install --save-dev nuxt-scheduler
+npm i @tensorflow/tfjs
 ```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
