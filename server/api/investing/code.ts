@@ -67,24 +67,28 @@ export default defineEventHandler(async (event) => {
 
   // fetch 를 이용해서 위 url로 post 요청을 보내고, 결과를 받아서 처리한다.
   // 코드 작성해줘
+  let skip = 0;
 
-  const response = await getData(0);
+  const response = await getData(skip);
   const result = await response.json();
 
   // skip 을 100 씩 올려가면서, 다음페이지도 조회하도록 코드를 작성해줘
-
   while (result.page.hasNextPage) {
-    const response = await getData(result.page.totalItems);
+    skip += 100;
+    const response = await getData(skip);
 
     const nextResult = await response.json();
     result.rows = result.rows.concat(nextResult.rows);
     result.page = nextResult.page;
   }
 
+  console.log("rowlength", result.rows.length);
+
   return result;
 });
 
 const getData = (skip: number) => {
+  console.log("skip", skip);
   return fetch("https://www.investing.com/pro/_/screener-v2/query", {
     method: "POST",
     headers: {
