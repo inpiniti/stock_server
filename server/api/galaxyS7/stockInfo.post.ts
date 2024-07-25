@@ -1,6 +1,4 @@
-import { drizzle } from "drizzle-orm/postgres-js";
 import { eq, and } from "drizzle-orm";
-import postgres from "postgres";
 import { getLoopData } from "../investing/code";
 
 export default defineEventHandler(async (event) => {
@@ -8,18 +6,6 @@ export default defineEventHandler(async (event) => {
   const { country, market } = getQuery(event);
 
   try {
-    const ip = "116.121.7.117";
-    const port = "5432";
-    const user = "inpiniti";
-    const password = "wjd53850";
-    const database = "inpiniti";
-
-    const url = `postgres://${user}:${password}@${ip}:${port}/${database}`;
-
-    // for query purposes
-    const queryClient = postgres(url);
-    const db = drizzle(queryClient);
-
     // 데이터 조회
     const data = await getLoopData({
       country: String(country),
@@ -39,7 +25,7 @@ export default defineEventHandler(async (event) => {
 
     // 삽입전에 기존 데이터 제거
     // country 가 KR 이고, market 이 Seoul 인 데이터만 제거
-    await db
+    await useGalaxy()
       .delete(pgTableStockInfo)
       .where(
         and(
@@ -50,7 +36,7 @@ export default defineEventHandler(async (event) => {
 
     // 분할된 데이터 삽입
     for (const chunk of dataChunks) {
-      await db.insert(pgTableStockInfo).values(chunk);
+      await useGalaxy().insert(pgTableStockInfo).values(chunk);
     }
 
     return "success";

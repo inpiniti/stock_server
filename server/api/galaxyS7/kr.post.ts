@@ -1,22 +1,7 @@
-import { drizzle } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
 import { updateStore } from "../tradingview/[countryCode]";
 
 export default defineEventHandler(async (event) => {
   try {
-    const ip = "116.121.7.117";
-    const port = "5432";
-    const user = "inpiniti";
-    const password = "wjd53850";
-    const database = "inpiniti";
-
-    const url = `postgres://${user}:${password}@${ip}:${port}/${database}`;
-
-    // for query purposes
-    const queryClient = postgres(url);
-    const db = drizzle(queryClient);
-    //const data = await db.select().from(pgTableKrSeoul);
-
     // 데이터 조회
     const data = await updateStore("kr");
 
@@ -33,7 +18,7 @@ export default defineEventHandler(async (event) => {
 
     // 분할된 데이터 삽입
     for (const chunk of dataChunks) {
-      await db.insert(pgTableKrSeoul).values(chunk);
+      await useGalaxy().insert(pgTableKrSeoul).values(chunk);
     }
 
     return "success";
