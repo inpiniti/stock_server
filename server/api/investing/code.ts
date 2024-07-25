@@ -1,81 +1,29 @@
 export default defineEventHandler(async (event) => {
-  // post https://www.investing.com/pro/_/screener-v2/query
-  // header : Domain-Id:kr, X-Requested-With:investing-client/4bbc9b1
-  // body : {
-  //     "query": {
-  //         "filters": [],
-  //         "sort": {
-  //             "metric": "marketcap_adj_latest",
-  //             "direction": "DESC"
-  //         },
-  //         "prefilters": {
-  //             "market": "KR",
-  //             "primaryOnly": true,
-  //             "exchange": "Seoul"
-  //         }
-  //     },
-  //     "metrics": [
-  //         "investing_exchange",
-  //         "investing_sector",
-  //         "investing_industry",
-  //         "marketcap_adj_latest",
-  //         "pe_ltm_latest",
-  //         "peg_ltm",
-  //         "asset_price_latest",
-  //         "asset_price_latest_change_pct",
-  //         "fair_value",
-  //         "fair_value_upside",
-  //         "fair_value_label",
-  //         "analyst_target",
-  //         "analyst_target_upside",
-  //         "fin_health_overall_label"
-  //     ],
-  //     "page": {
-  //         "skip": 0,
-  //         "limit": 100
-  //     }
-  // }
+  // "KR", "Seoul" 이런식으로 들어옴
+  const { country, market } = getQuery(event);
 
-  // result :
-  // {
-  //     "page": {
-  //         "hasPreviousPage": false,
-  //         "hasNextPage": true,
-  //         "pageSize": 100,
-  //         "totalItems": 1532
-  //     },
-  //     "rows": [
-  //         {
-  //             "asset": {
-  //                 "hidden": false,
-  //                 "uid": "KOSE:A005930",
-  //                 "pairID": 43433,
-  //                 "ticker": "005930",
-  //                 "name": "삼성전자",
-  //                 "primary": "KOSE:A005930",
-  //                 "path": "/equities/samsung-electronics-co-ltd"
-  //             },
-  //             "data": [
-  //                 {
-  //                     "hidden": false,
-  //                 ...
-  //             },
-  //         },
-  //         ...
-  //     ]
-  // }
+  return await getLoopData({
+    country: String(country),
+    market: String(market),
+  });
+});
 
-  // fetch 를 이용해서 위 url로 post 요청을 보내고, 결과를 받아서 처리한다.
-  // 코드 작성해줘
+export const getLoopData = async ({
+  country,
+  market,
+}: {
+  country: string;
+  market: string;
+}) => {
   let skip = 0;
 
-  const response = await getData(skip);
+  const response = await getData({ skip, country, market });
   const result = await response.json();
 
   // skip 을 100 씩 올려가면서, 다음페이지도 조회하도록 코드를 작성해줘
   while (result.page.hasNextPage) {
     skip += 100;
-    const response = await getData(skip);
+    const response = await getData({ skip, country, market });
 
     const nextResult = await response.json();
     result.rows = result.rows.concat(nextResult.rows);
@@ -84,10 +32,39 @@ export default defineEventHandler(async (event) => {
 
   console.log("rowlength", result.rows.length);
 
-  return result;
-});
+  return ticker({ result, country, market });
+};
 
-const getData = (skip: number) => {
+// ticker 추출
+export const ticker = ({
+  result,
+  country,
+  market,
+}: {
+  result: any;
+  country: string;
+  market: string;
+}) => {
+  const ticket = result.rows.map((item: any) => {
+    return {
+      stock_code: item.asset.ticker,
+      country,
+      market,
+    };
+  });
+
+  return ticket;
+};
+
+const getData = ({
+  skip,
+  country,
+  market,
+}: {
+  skip: number;
+  country: string;
+  market: string;
+}) => {
   console.log("skip", skip);
   return fetch("https://www.investing.com/pro/_/screener-v2/query", {
     method: "POST",
@@ -104,9 +81,9 @@ const getData = (skip: number) => {
           direction: "DESC",
         },
         prefilters: {
-          market: "KR",
+          market: country,
           primaryOnly: true,
-          exchange: "Seoul",
+          exchange: market,
         },
       },
       metrics: [
