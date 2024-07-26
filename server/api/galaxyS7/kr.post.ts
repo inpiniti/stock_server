@@ -1,12 +1,15 @@
 import { updateStore } from "../tradingview/[countryCode]";
+import { getStockInfo } from "./stockInfo.get";
 
 export default defineEventHandler(async (event) => {
   try {
-    // 데이터 조회
+    // 데이터 크롤링 조회
     const data = await updateStore("kr");
 
     // seoul 만 뽑아내서 저장
+    getStockInfo({ country: "KR", market: "Seoul" });
     // kosdaq 만 뽑아내서 저장
+    getStockInfo({ country: "KR", market: "KOSDAQ" });
 
     // 데이터 분할
     // 예를 들어, 각 행이 83개의 파라미터를 사용한다고 가정하면, 최대 6553개의 행을 한 번에 삽입할 수 있습니다.

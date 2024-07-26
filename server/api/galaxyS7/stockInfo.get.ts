@@ -1,11 +1,19 @@
-import { drizzle } from "drizzle-orm/postgres-js";
 import { eq, and } from "drizzle-orm";
-import postgres from "postgres";
 
 export default defineEventHandler(async (event) => {
   // "KR", "Seoul" 이런식으로 들어옴
   const { country, market } = getQuery(event);
 
+  getStockInfo({ country: String(country), market: String(market) });
+});
+
+export const getStockInfo = async ({
+  country,
+  market,
+}: {
+  country: string;
+  market: string;
+}) => {
   try {
     const data = await useGalaxy()
       .select()
@@ -21,4 +29,4 @@ export default defineEventHandler(async (event) => {
   } catch (error) {
     return error;
   }
-});
+};
