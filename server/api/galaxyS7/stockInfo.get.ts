@@ -3,8 +3,10 @@ import { eq, and } from "drizzle-orm";
 export default defineEventHandler(async (event) => {
   // "KR", "Seoul" 이런식으로 들어옴
   const { country, market } = getQuery(event);
-
-  getStockInfo({ country: String(country), market: String(market) });
+  return await getStockInfo({
+    country: String(country),
+    market: String(market),
+  });
 });
 
 export const getStockInfo = async ({
@@ -20,8 +22,8 @@ export const getStockInfo = async ({
       .from(pgTableStockInfo)
       .where(
         and(
-          eq(pgTableStockInfo.country, String(country)),
-          eq(pgTableStockInfo.market, String(market))
+          eq(pgTableStockInfo.country, country),
+          eq(pgTableStockInfo.market, market)
         )
       );
 
