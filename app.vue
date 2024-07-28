@@ -29,7 +29,7 @@ watch([step1, step2, step3, step4], async () => {
 <template>
   <div class="flex divide-x h-svh overflow-hidden">
     <div class="flex flex-col shrink-0 w-32 divide-y">
-      <div class="p-1">db</div>
+      <div class="p-1">inpiniti</div>
       <div class="p-1 flex flex-col gap-1">
         <Button
           size="xs"
