@@ -45,13 +45,17 @@ export const ticker = ({
   country: string;
   market: string;
 }) => {
-  const ticket = result.rows.map((item: any) => {
-    return {
-      stock_code: item.asset.ticker,
-      country,
-      market,
-    };
-  });
+  const ticket = result.rows.reduce((acc: any[], item: any) => {
+    // 이미 acc 배열에 동일한 stock_code를 가진 항목이 있는지 확인
+    if (!acc.find((accItem) => accItem.stock_code === item.asset.ticker)) {
+      acc.push({
+        stock_code: item.asset.ticker,
+        country,
+        market,
+      });
+    }
+    return acc;
+  }, []);
 
   return ticket;
 };
