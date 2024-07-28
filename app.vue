@@ -27,7 +27,7 @@ watch([step1, step2, step3, step4], async () => {
 });
 </script>
 <template>
-  <div class="flex divide-x h-svh">
+  <div class="flex divide-x h-svh overflow-hidden">
     <div class="flex flex-col shrink-0 w-32 divide-y">
       <div class="p-1">db</div>
       <div class="p-1 flex flex-col gap-1">
@@ -277,16 +277,17 @@ watch([step1, step2, step3, step4], async () => {
         </div>
       </div>
     </div>
-    <div class="flex-0 h-full w-full divide-y">
-      <div class="p-1">{{ url }}</div>
-      <div class="bg-neutral-50 h-full p-1">
-        <Table class="bg-white border">
+    <div class="grow-[0] overflow-hidden h-full w-full divide-y">
+      <div class="p-1 shrink-0">{{ url }}</div>
+      <div class="grow-[0] overflow-auto bg-neutral-50">
+        <Table class="whitespace-nowrap">
           <TableHeader>
             <TableRow>
               <TableHead
                 v-for="filed in dataList.length > 0
                   ? Object.keys(dataList[0])
                   : []"
+                class="px-2 py-1"
               >
                 {{ filed }}
               </TableHead>
@@ -298,7 +299,11 @@ watch([step1, step2, step3, step4], async () => {
               :key="index"
             >
               <!-- 각 invoice 객체의 키와 값을 순회합니다. -->
-              <TableCell v-for="(value, field) in item" :key="field">
+              <TableCell
+                v-for="(value, field) in item"
+                :key="field"
+                class="px-2 py-1"
+              >
                 {{ value }}
               </TableCell>
             </TableRow>
