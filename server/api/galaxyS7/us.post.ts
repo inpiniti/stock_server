@@ -4,6 +4,11 @@ import { getLatestNasdaq } from "./us/nasdaq/last";
 import { nasdaq_live_save } from "./us/nasdaq/live.post";
 
 export default defineEventHandler(async (event) => {
+  return usCollectSave();
+});
+
+// 수집 저장
+export const usCollectSave = async () => {
   try {
     // 데이터 크롤링 조회
     const data = await updateStore("us");
@@ -64,7 +69,7 @@ export default defineEventHandler(async (event) => {
   } catch (error) {
     return error;
   }
-});
+};
 
 // 데이터 분할 함수
 function splitData(data: any, chunkSize: number) {

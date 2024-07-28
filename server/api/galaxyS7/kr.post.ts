@@ -6,6 +6,11 @@ import { kosdaq_live_save } from "./kr/kosdaq/live.post";
 import { seoul_live_save } from "./kr/seoul/live.post";
 
 export default defineEventHandler(async (event) => {
+  return krCollectSave();
+});
+
+// 수집 저장
+export const krCollectSave = async () => {
   try {
     // 데이터 크롤링 조회
     const data = await updateStore("kr");
@@ -107,7 +112,7 @@ export default defineEventHandler(async (event) => {
   } catch (error) {
     return error;
   }
-});
+};
 
 // 데이터 분할 함수
 function splitData(data: any, chunkSize: number) {
