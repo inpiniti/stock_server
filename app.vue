@@ -45,7 +45,7 @@ watch([step1, step2, step3, step4], async () => {
             @click="
               step2 = 'kr';
               step3 = 'kosdaq';
-              step4 = 'all';
+              step4 = 'live';
             "
           >
             kr
@@ -57,7 +57,7 @@ watch([step1, step2, step3, step4], async () => {
               :variant="step3 === 'kosdaq' ? 'default' : 'outline'"
               @click="
                 step3 = 'kosdaq';
-                step4 = 'all';
+                step4 = 'live';
               "
             >
               kosdaq
@@ -77,13 +77,20 @@ watch([step1, step2, step3, step4], async () => {
               >
                 last
               </Button>
+              <Button
+                size="xs"
+                :variant="step4 === 'live' ? 'default' : 'outline'"
+                @click="step4 = 'live'"
+              >
+                live
+              </Button>
             </div>
             <Button
               size="xs"
               :variant="step3 === 'seoul' ? 'default' : 'outline'"
               @click="
                 step3 = 'seoul';
-                step4 = 'all';
+                step4 = 'live';
               "
             >
               seoul
@@ -103,6 +110,13 @@ watch([step1, step2, step3, step4], async () => {
               >
                 last
               </Button>
+              <Button
+                size="xs"
+                :variant="step4 === 'live' ? 'default' : 'outline'"
+                @click="step4 = 'live'"
+              >
+                live
+              </Button>
             </div>
           </div>
           <Button
@@ -111,6 +125,7 @@ watch([step1, step2, step3, step4], async () => {
             @click="
               step2 = 'us';
               step3 = 'nasdaq';
+              step4 = 'live';
             "
           >
             us
@@ -121,7 +136,10 @@ watch([step1, step2, step3, step4], async () => {
             <Button
               size="xs"
               :variant="step3 === 'nasdaq' ? 'default' : 'outline'"
-              @click="step3 = 'nasdaq'"
+              @click="
+                step3 = 'nasdaq';
+                step4 = 'live';
+              "
             >
               nasdaq
             </Button>
@@ -139,6 +157,13 @@ watch([step1, step2, step3, step4], async () => {
                 @click="step4 = 'last'"
               >
                 last
+              </Button>
+              <Button
+                size="xs"
+                :variant="step4 === 'live' ? 'default' : 'outline'"
+                @click="step4 = 'live'"
+              >
+                live
               </Button>
             </div>
           </div>
