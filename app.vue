@@ -51,7 +51,7 @@ watch([step1, step2, step3, step4], async () => {
             kr
           </Button>
           <div class="flex flex-col gap-1 pl-2" v-if="step2 == 'kr'">
-            <Button size="xs" variant="secondary">kr 등록</Button>
+            <ButtonKrPost />
             <Button
               size="xs"
               :variant="step3 === 'kosdaq' ? 'default' : 'outline'"
@@ -117,6 +117,7 @@ watch([step1, step2, step3, step4], async () => {
           </Button>
           <div class="flex flex-col gap-1 pl-2" v-if="step2 == 'us'">
             <Button size="xs" variant="secondary">us 등록</Button>
+            <ButtonUsPost />
             <Button
               size="xs"
               :variant="step3 === 'nasdaq' ? 'default' : 'outline'"
