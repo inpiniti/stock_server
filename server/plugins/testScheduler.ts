@@ -4,7 +4,7 @@ import { usCollectSave } from "../api/galaxyS7/us.post";
 import { useScheduler } from "#scheduler";
 
 export default defineNitroPlugin(() => {
-  startScheduler();
+  //startScheduler();
 });
 
 function startScheduler() {
