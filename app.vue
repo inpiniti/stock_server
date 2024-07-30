@@ -29,7 +29,7 @@ watch([step1, step2, step3, step4], async () => {
 <template>
   <div class="flex divide-x h-svh overflow-hidden">
     <div class="flex flex-col shrink-0 w-32 divide-y">
-      <div class="p-1">db</div>
+      <div class="p-1">inpiniti</div>
       <div class="p-1 flex flex-col gap-1">
         <Button
           size="xs"
@@ -45,19 +45,19 @@ watch([step1, step2, step3, step4], async () => {
             @click="
               step2 = 'kr';
               step3 = 'kosdaq';
-              step4 = 'all';
+              step4 = 'live';
             "
           >
             kr
           </Button>
           <div class="flex flex-col gap-1 pl-2" v-if="step2 == 'kr'">
-            <Button size="xs" variant="secondary">kr 등록</Button>
+            <ButtonKrPost />
             <Button
               size="xs"
               :variant="step3 === 'kosdaq' ? 'default' : 'outline'"
               @click="
                 step3 = 'kosdaq';
-                step4 = 'all';
+                step4 = 'live';
               "
             >
               kosdaq
@@ -77,13 +77,20 @@ watch([step1, step2, step3, step4], async () => {
               >
                 last
               </Button>
+              <Button
+                size="xs"
+                :variant="step4 === 'live' ? 'default' : 'outline'"
+                @click="step4 = 'live'"
+              >
+                live
+              </Button>
             </div>
             <Button
               size="xs"
               :variant="step3 === 'seoul' ? 'default' : 'outline'"
               @click="
                 step3 = 'seoul';
-                step4 = 'all';
+                step4 = 'live';
               "
             >
               seoul
@@ -103,6 +110,13 @@ watch([step1, step2, step3, step4], async () => {
               >
                 last
               </Button>
+              <Button
+                size="xs"
+                :variant="step4 === 'live' ? 'default' : 'outline'"
+                @click="step4 = 'live'"
+              >
+                live
+              </Button>
             </div>
           </div>
           <Button
@@ -111,16 +125,21 @@ watch([step1, step2, step3, step4], async () => {
             @click="
               step2 = 'us';
               step3 = 'nasdaq';
+              step4 = 'live';
             "
           >
             us
           </Button>
           <div class="flex flex-col gap-1 pl-2" v-if="step2 == 'us'">
             <Button size="xs" variant="secondary">us 등록</Button>
+            <ButtonUsPost />
             <Button
               size="xs"
               :variant="step3 === 'nasdaq' ? 'default' : 'outline'"
-              @click="step3 = 'nasdaq'"
+              @click="
+                step3 = 'nasdaq';
+                step4 = 'live';
+              "
             >
               nasdaq
             </Button>
@@ -138,6 +157,13 @@ watch([step1, step2, step3, step4], async () => {
                 @click="step4 = 'last'"
               >
                 last
+              </Button>
+              <Button
+                size="xs"
+                :variant="step4 === 'live' ? 'default' : 'outline'"
+                @click="step4 = 'live'"
+              >
+                live
               </Button>
             </div>
           </div>

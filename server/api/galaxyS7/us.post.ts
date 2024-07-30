@@ -1,8 +1,14 @@
 import { updateStore } from "../tradingview/[countryCode]";
 import { getStockInfo } from "./stockInfo.get";
 import { getLatestNasdaq } from "./us/nasdaq/last";
+import { nasdaq_live_save } from "./us/nasdaq/live.post";
 
 export default defineEventHandler(async (event) => {
+  return usCollectSave();
+});
+
+// 수집 저장
+export const usCollectSave = async () => {
   try {
     // 데이터 크롤링 조회
     const data = await updateStore("us");
@@ -11,7 +17,7 @@ export default defineEventHandler(async (event) => {
     // nasdaq 만 뽑아내서 저장
     const nasdaq_orgin_list = await getStockInfo({
       country: "US",
-      market: "Nasdaq",
+      market: "NASDAQ",
     });
     console.log("nasdaq_orgin_list.leanth", nasdaq_orgin_list.length);
 
@@ -23,6 +29,7 @@ export default defineEventHandler(async (event) => {
       return nasdaq_code_list.includes(item.name);
     });
     console.log("nasdaq_data_list_leanth", nasdaq_data_list.length);
+    nasdaq_live_save(nasdaq_data_list);
 
     // getLatestSeoul 와 seoul_data_list 를 비교하여, 새로운 데이터만 저장
     const latestNasdaqList: { name: string; volume: string }[] =
@@ -62,7 +69,7 @@ export default defineEventHandler(async (event) => {
   } catch (error) {
     return error;
   }
-});
+};
 
 // 데이터 분할 함수
 function splitData(data: any, chunkSize: number) {
