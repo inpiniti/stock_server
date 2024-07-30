@@ -48,6 +48,7 @@ export const krCollectSave = async () => {
     // getLatestSeoul 와 seoul_data_list 를 비교하여, 새로운 데이터만 저장
     const latestSeoulList: { name: string; volume: string }[] =
       await getLatestSeoul();
+    console.log("latestSeoulList", latestSeoulList);
     // 최신 데이터를 기반으로 객체 생성
     const latestDataMap = latestSeoulList.reduce(
       (acc: any, { name, volume }) => {
@@ -65,6 +66,7 @@ export const krCollectSave = async () => {
     // getLatestKosdaq 와 kosdaq_data_list 를 비교하여, 새로운 데이터만 저장
     const latestKosdaqList: { name: string; volume: string }[] =
       await getLatestKosdaq();
+    console.log("latestKosdaqList", latestKosdaqList);
     // 최신 데이터를 기반으로 객체 생성
     const latestKosdaqMap = latestKosdaqList.reduce(
       (acc: any, { name, volume }) => {
