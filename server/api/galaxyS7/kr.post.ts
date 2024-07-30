@@ -76,15 +76,8 @@ export default defineEventHandler(async (event) => {
     //   perf_all: 25458.9536221255,
     //   volatility_w: 1.659131365931498,
     //   volatility_m: 1.9780899848756683,
-    //   premarket_close: null,
-    //   premarket_change: null,
-    //   premarket_gap: null,
-    //   premarket_volume: null,
     //   gap: 0.3731343283582089,
     //   volume_change: -28.6141068719838,
-    //   postmarket_close: null,
-    //   postmarket_change: null,
-    //   postmarket_volume: null,
     //   perf_1_y_market_cap: 19.13703792246997,
     //   price_earnings_growth_ttm: null,
     //   price_sales_current: 2.044623603798172,
@@ -97,7 +90,6 @@ export default defineEventHandler(async (event) => {
     //   enterprise_value_to_ebit_ttm: 36.96527085126417,
     //   enterprise_value_ebitda_ttm: 8.979345308284302,
     //   dps_common_stock_prim_issue_fy: 1444,
-    //   dps_common_stock_prim_issue_fq: 361,
     //   dividends_yield: 1.7849196,
     //   dividend_payout_ratio_ttm: 49.80716967998893,
     //   dps_common_stock_prim_issue_yoy_growth_fy: 0,
@@ -212,7 +204,12 @@ export default defineEventHandler(async (event) => {
 
       // 분할된 데이터 삽입
       for (const chunk of dataChunks) {
-        await useGalaxy().insert(pgTableKrSeoul).values(chunk);
+        //await useGalaxy().insert(pgTableKrSeoul).values(chunk);
+        const { error } = await useSupabase().from("seoul").insert(chunk);
+        if (error) {
+          console.error("Error inserting data:", error);
+          throw error;
+        }
       }
     }
 
@@ -223,7 +220,12 @@ export default defineEventHandler(async (event) => {
 
       // 분할된 데이터 삽입
       for (const chunk of dataChunks) {
-        await useGalaxy().insert(pgTableKrKosdaq).values(chunk);
+        //await useGalaxy().insert(pgTableKrKosdaq).values(chunk);
+        const { error } = await useSupabase().from("kosdaq").insert(chunk);
+        if (error) {
+          console.error("Error inserting data:", error);
+          throw error;
+        }
       }
     }
 
