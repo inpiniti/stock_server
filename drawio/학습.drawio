@@ -1,0 +1,142 @@
+<mxfile host="65bd71144e">
+    <diagram id="jQDC74O-21fjGyXQOkZ9" name="페이지-1">
+        <mxGraphModel dx="1432" dy="625" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="kr 데이터 등록" style="swimlane;html=1;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;horizontal=0;startSize=20;horizontalStack=0;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="120" width="1090" height="600" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" value="model" style="swimlane;html=1;startSize=20;horizontal=0;" vertex="1" parent="2">
+                    <mxGeometry x="20" width="1070" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="140" value="저장" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="41">
+                    <mxGeometry x="580" y="30" width="100" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="51" value="one hour 전" style="swimlane;html=1;startSize=20;horizontal=0;" vertex="1" parent="2">
+                    <mxGeometry x="20" y="120" width="1070" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="135" style="edgeStyle=none;html=1;" edge="1" parent="51" source="43" target="131">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="43" value="필요한 필드만 조회" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="51">
+                    <mxGeometry x="60" y="30" width="100" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="121" value="전체" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="51">
+                    <mxGeometry x="220" y="10" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="131" value="soeul" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="51">
+                    <mxGeometry x="220" y="45" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="132" value="kosdaq" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="51">
+                    <mxGeometry x="220" y="80" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="133" value="nasdaq" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="51">
+                    <mxGeometry x="299" y="10" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="137" style="edgeStyle=none;html=1;" edge="1" parent="51" source="134" target="136">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="134" value="sector별&lt;br&gt;21개임" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="51">
+                    <mxGeometry x="299" y="45" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="139" style="edgeStyle=none;html=1;" edge="1" parent="51" source="136" target="138">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="136" value="학습" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="51">
+                    <mxGeometry x="430" y="30" width="100" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="138" value="모델" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="51">
+                    <mxGeometry x="580" y="30" width="100" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="68" value="n day 전" style="swimlane;html=1;startSize=20;horizontal=0;" vertex="1" parent="2">
+                    <mxGeometry x="20" y="240" width="1070" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="143" value="필요한 필드만 조회" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="68">
+                    <mxGeometry x="60" y="30" width="100" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="144" value="전체" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="68">
+                    <mxGeometry x="220" y="10" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="145" value="soeul" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="68">
+                    <mxGeometry x="220" y="45" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="142" style="edgeStyle=none;html=1;" edge="1" parent="68" source="143" target="145">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="146" value="kosdaq" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="68">
+                    <mxGeometry x="220" y="80" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="147" value="nasdaq" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="68">
+                    <mxGeometry x="299" y="10" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="148" value="sector별" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="68">
+                    <mxGeometry x="299" y="45" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="163" value="1 ~ 6" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="68">
+                    <mxGeometry x="160" y="70" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="90" value="n month 전" style="swimlane;html=1;startSize=20;horizontal=0;" vertex="1" parent="2">
+                    <mxGeometry x="20" y="360" width="1070" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="150" value="필요한 필드만 조회" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="90">
+                    <mxGeometry x="60" y="30" width="100" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="151" value="전체" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="90">
+                    <mxGeometry x="220" y="10" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="152" value="soeul" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="90">
+                    <mxGeometry x="220" y="45" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="149" style="edgeStyle=none;html=1;" edge="1" parent="90" source="150" target="152">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="153" value="kosdaq" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="90">
+                    <mxGeometry x="220" y="80" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="154" value="nasdaq" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="90">
+                    <mxGeometry x="299" y="10" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="155" value="sector별" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="90">
+                    <mxGeometry x="299" y="45" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="164" value="1 ~ 11" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="90">
+                    <mxGeometry x="160" y="70" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="103" value="n week 전" style="swimlane;html=1;startSize=20;horizontal=0;" vertex="1" parent="2">
+                    <mxGeometry x="20" y="480" width="1070" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="157" value="필요한 필드만 조회" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="103">
+                    <mxGeometry x="60" y="30" width="100" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="158" value="전체" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="103">
+                    <mxGeometry x="220" y="10" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="159" value="soeul" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="103">
+                    <mxGeometry x="220" y="45" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="156" style="edgeStyle=none;html=1;" edge="1" parent="103" source="157" target="159">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="160" value="kosdaq" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="103">
+                    <mxGeometry x="220" y="80" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="161" value="nasdaq" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="103">
+                    <mxGeometry x="299" y="10" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="162" value="sector별" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="103">
+                    <mxGeometry x="299" y="45" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="165" value="1 ~ 4" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="103">
+                    <mxGeometry x="160" y="70" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="141" style="edgeStyle=none;html=1;" edge="1" parent="2" source="138" target="140">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="166" value="26 * 21 개의 모델이 만들어질 듯" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="80" width="180" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
