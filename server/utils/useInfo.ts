@@ -52,8 +52,33 @@ export const useInfo = () => {
     }
   };
 
+  const seoulInsert = async () => {
+    return await insert("KR", "Seoul");
+  };
+  const seoulSelect = async () => {
+    return await select("KR", "Seoul");
+  };
+  const kosdaqInsert = async () => {
+    return await insert("KR", "KOSDAQ");
+  };
+  const kosdaqSelect = async () => {
+    return await select("KR", "KOSDAQ");
+  };
+  const nasdaqInsert = async () => {
+    return await insert("US", "NASDAQ");
+  };
+  const nasdaqSelect = async () => {
+    return await select("US", "NASDAQ");
+  };
+
   return {
     insert,
     select,
+    seoulInsert,
+    seoulSelect,
+    kosdaqInsert,
+    kosdaqSelect,
+    nasdaqInsert,
+    nasdaqSelect,
   };
 };
