@@ -112,17 +112,11 @@ export async function updateStore(countryCode: string) {
       "fractional", // 분수
       "minmove2", // 최소 이동 2
       "currency", // 통화
-      "premarket_change", // 시장 개장 전 변동
-      "premarket_gap", // 시장 개장 전 갭
-      "premarket_volume", // 시장 개장 전 거래량
       "close", // 종가
       "change", // 변화
       "gap", // 갭
       "volume", // 거래량
       "volume_change", // 거래량 변동
-      "postmarket_close", // 시장 폐장 후 종가
-      "postmarket_change", // 시장 폐장 후 변동
-      "postmarket_volume", // 시장 폐장 후 거래량
       "exchange", // 거래소
     ];
     const 평가 = [
@@ -155,7 +149,6 @@ export async function updateStore(countryCode: string) {
       "type", // 유형
       "dps_common_stock_prim_issue_fy", // 주식 기본 발행 DPS(연간)
       "fundamental_currency_code", // 기본 통화 코드
-      "dps_common_stock_prim_issue_fq", // 주식 기본 발행 DPS(분기별)
       "dividends_yield_current", // 현재 배당 수익률
       "dividends_yield", // 배당 수익률
       "dividend_payout_ratio_ttm", // 배당 지급 비율(TTM)

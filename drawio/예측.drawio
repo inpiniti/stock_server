@@ -1,0 +1,58 @@
+<mxfile host="65bd71144e">
+    <diagram id="LVcDB1lngO7evqMphRVR" name="페이지-1">
+        <mxGraphModel dx="1432" dy="625" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="kr 데이터 등록" style="swimlane;html=1;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;horizontal=0;startSize=20;horizontalStack=0;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="120" width="680" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="model" style="swimlane;html=1;startSize=20;horizontal=0;" vertex="1" parent="2">
+                    <mxGeometry x="20" width="660" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="47" value="조회" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="3">
+                    <mxGeometry x="280" y="50" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="52" style="edgeStyle=none;html=1;" edge="1" parent="3" source="51" target="47">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="51" value="사용자가 모델 선택" style="rounded=0;whiteSpace=wrap;html=1;horizontal=1;verticalAlign=top;" vertex="1" parent="3">
+                    <mxGeometry x="60" y="10" width="170" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="54" value="전체" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="3">
+                    <mxGeometry x="70" y="40" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="55" value="soeul" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="3">
+                    <mxGeometry x="70" y="75" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="56" value="kosdaq" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="3">
+                    <mxGeometry x="70" y="110" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="57" value="nasdaq" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="3">
+                    <mxGeometry x="149" y="40" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="58" value="sector별&lt;br&gt;21개임" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;align=center;" vertex="1" parent="3">
+                    <mxGeometry x="149" y="75" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="live" style="swimlane;html=1;startSize=20;horizontal=0;" vertex="1" parent="2">
+                    <mxGeometry x="20" y="160" width="660" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="50" style="edgeStyle=none;html=1;" edge="1" parent="5" source="46" target="49">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="46" value="조회" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="5">
+                    <mxGeometry x="280" y="30" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="49" value="21 개 필드 예측" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="5">
+                    <mxGeometry x="450" y="30" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="48" style="edgeStyle=none;html=1;" edge="1" parent="2" source="47" target="46">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="45" value="26 * 21 개의 모델이 만들어질 듯" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="80" width="180" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

@@ -28,7 +28,7 @@ export const krCollectSave = async () => {
       return seoul_code_list.includes(item.name);
     });
     console.log("seoul_data_list_leanth", seoul_data_list.length);
-    seoul_live_save(seoul_data_list);
+    //seoul_live_save(seoul_data_list);
 
     // kosdaq 만 뽑아내서 저장
     const kosdaq_orgin_list = await getStockInfo({
@@ -43,11 +43,12 @@ export const krCollectSave = async () => {
       return kosdaq_code_list.includes(item.name);
     });
     console.log("kosdaq_data_list_leanth", kosdaq_data_list.length);
-    kosdaq_live_save(kosdaq_data_list);
+    //kosdaq_live_save(kosdaq_data_list);
 
     // getLatestSeoul 와 seoul_data_list 를 비교하여, 새로운 데이터만 저장
     const latestSeoulList: { name: string; volume: string }[] =
       await getLatestSeoul();
+    console.log("latestSeoulList", latestSeoulList);
     // 최신 데이터를 기반으로 객체 생성
     const latestDataMap = latestSeoulList.reduce(
       (acc: any, { name, volume }) => {
@@ -65,6 +66,7 @@ export const krCollectSave = async () => {
     // getLatestKosdaq 와 kosdaq_data_list 를 비교하여, 새로운 데이터만 저장
     const latestKosdaqList: { name: string; volume: string }[] =
       await getLatestKosdaq();
+    console.log("latestKosdaqList", latestKosdaqList);
     // 최신 데이터를 기반으로 객체 생성
     const latestKosdaqMap = latestKosdaqList.reduce(
       (acc: any, { name, volume }) => {
@@ -93,7 +95,12 @@ export const krCollectSave = async () => {
 
       // 분할된 데이터 삽입
       for (const chunk of dataChunks) {
-        await useGalaxy().insert(pgTableKrSeoul).values(chunk);
+        //await useGalaxy().insert(pgTableKrSeoul).values(chunk);
+        const { error } = await useSupabase().from("seoul").insert(chunk);
+        if (error) {
+          console.error("Error inserting data:", error);
+          throw error;
+        }
       }
     }
 
@@ -104,7 +111,12 @@ export const krCollectSave = async () => {
 
       // 분할된 데이터 삽입
       for (const chunk of dataChunks) {
-        await useGalaxy().insert(pgTableKrKosdaq).values(chunk);
+        //await useGalaxy().insert(pgTableKrKosdaq).values(chunk);
+        const { error } = await useSupabase().from("kosdaq").insert(chunk);
+        if (error) {
+          console.error("Error inserting data:", error);
+          throw error;
+        }
       }
     }
 
