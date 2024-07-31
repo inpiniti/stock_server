@@ -1,4 +1,4 @@
-CREATE TABLE public.nasdaq (
+CREATE TABLE public.seoul (
 	"name" text NOT NULL,
 	description text NULL,
 	logoid text NULL,
@@ -98,6 +98,6 @@ CREATE TABLE public.nasdaq (
 	stoch_k numeric NULL,
 	stoch_d numeric NULL,
 	created_at timestamp NOT NULL DEFAULT now(),
-	CONSTRAINT nasdaq_pkey PRIMARY KEY (name, volume, created_at)
+	CONSTRAINT seoul_pkey PRIMARY KEY (name, volume, created_at)
 );
-CREATE INDEX nasdaq_sector_idx ON public.nasdaq (sector);
+CREATE INDEX seoul_sector_idx ON public.seoul (sector);
