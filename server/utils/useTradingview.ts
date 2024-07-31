@@ -354,7 +354,39 @@ export const useTradingview = () => {
     }
   };
 
+  const tradingviewKrFiter = async () => {
+    const [kr_crawling, seoulSelect, kosdaqSelect] = await Promise.all([
+      crawling("kr"),
+      useInfo().seoulSelect(),
+      useInfo().kosdaqSelect(),
+    ]);
+
+    return {
+      seoul: kr_crawling.filter((item: any) => {
+        return seoulSelect.includes(item.name);
+      }),
+      kosdaq: kr_crawling.filter((item: any) => {
+        return kosdaqSelect.includes(item.name);
+      }),
+    };
+  };
+
+  const tradingviewUsFiter = async () => {
+    const [us_crawling, nasdaqSelect] = await Promise.all([
+      crawling("us"),
+      useInfo().nasdaqSelect(),
+    ]);
+
+    return {
+      nasdaq: us_crawling.filter((item: any) => {
+        return nasdaqSelect.includes(item.name);
+      }),
+    };
+  };
+
   return {
     crawling,
+    tradingviewKrFiter,
+    tradingviewUsFiter,
   };
 };

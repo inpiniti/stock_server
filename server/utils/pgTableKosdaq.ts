@@ -1,6 +1,6 @@
 import { pgTable, text, numeric, timestamp } from "drizzle-orm/pg-core";
 
-export const pgTableKrSeoul = pgTable("kr_seoul", {
+export const pgTableKosdaq = pgTable("kosdaq", {
   name: text("name").notNull(),
   description: text("description"),
   logoid: text("logoid"),
