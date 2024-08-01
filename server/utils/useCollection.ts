@@ -9,10 +9,6 @@ export const useCollection = async () => {
   const { newSeoul, newKosdaq, originKosdaq, originSeoul } = krResult;
   const { newNasdaq, originNasdaq } = usResult;
 
-  console.log("newSeoul", newSeoul.length);
-  console.log("newKosdaq", newKosdaq.length);
-  console.log("newNasdaq", newNasdaq.length);
-
   console.log("originSeoul", originSeoul.length);
   console.log("originKosdaq", originKosdaq.length);
   console.log("originNasdaq", originNasdaq.length);
@@ -25,6 +21,10 @@ export const useCollection = async () => {
 
   // 현재시간이 정각인지 확인
   if (new Date().getMinutes() == 0) {
+    console.log("newSeoul", newSeoul.length);
+    console.log("newKosdaq", newKosdaq.length);
+    console.log("newNasdaq", newNasdaq.length);
+
     await Promise.all([
       useHistory().seoulInsert(newSeoul),
       useHistory().kosdaqInsert(newKosdaq),
