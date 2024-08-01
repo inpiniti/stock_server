@@ -24,3 +24,15 @@ export function toSnakeCase(obj: any): any {
   });
   return newObj;
 }
+
+export function oneHourAgo() {
+  const oneHourAgo = new Date();
+  oneHourAgo.setHours(oneHourAgo.getHours() - 1);
+
+  // 한국 시간으로 변환
+  const kstOffset = 9 * 60 * 60 * 1000; // 9시간을 밀리초로 변환
+  const kstDate = new Date(oneHourAgo.getTime() + kstOffset);
+  const formattedDate = kstDate.toISOString().slice(0, 19).replace("T", " ");
+
+  return formattedDate;
+}
