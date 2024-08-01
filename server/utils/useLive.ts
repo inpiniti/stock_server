@@ -98,14 +98,14 @@ export const useLive = () => {
         const prevRow = prevSeoul.find(
           (prevRow: any) => prevRow.name === newRow.name
         );
-        return prevRow.volume !== newRow.volume;
+        return prevRow.volume != newRow.volume;
       });
 
       newKosdaq = kosdaq.filter((newRow: any) => {
         const prevRow = prevKosdaq.find(
           (prevRow: any) => prevRow.name === newRow.name
         );
-        return prevRow.volume !== newRow.volume;
+        return prevRow.volume != newRow.volume;
       });
     }
 
@@ -127,7 +127,7 @@ export const useLive = () => {
         const prevRow = prevNasdaq.find(
           (prevRow: any) => prevRow.name === newRow.name
         );
-        return prevRow.volume !== newRow.volume;
+        return prevRow.volume != newRow.volume;
       });
     }
 
