@@ -1,12 +1,12 @@
 import { sql } from "drizzle-orm";
 
-export const useLive = () => {
-  let dataOneHourAgo = {
-    seoul: [] as any,
-    kosdaq: [] as any,
-    nasdaq: [] as any,
-  };
+let dataOneHourAgo = {
+  seoul: [] as any,
+  kosdaq: [] as any,
+  nasdaq: [] as any,
+};
 
+export const useLive = () => {
   const seoulSelect = async () => {
     try {
       const data = await useGalaxy().select().from(pgTableSeoulLive);
@@ -89,7 +89,6 @@ export const useLive = () => {
 
     let newSeoul = [];
     let newKosdaq = [];
-
     if (new Date().getMinutes() == 0) {
       if (prevSeoul.length === 0 || prevKosdaq.length === 0) {
         newSeoul = seoul;
