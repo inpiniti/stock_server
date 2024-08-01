@@ -1,3 +1,5 @@
+import { useHistory } from "./useHistory";
+
 export const useCollection = async () => {
   const [krResult, usResult] = await Promise.all([
     useLive().newKr(),
@@ -20,4 +22,13 @@ export const useCollection = async () => {
     useLive().kosdaqInsert(originKosdaq),
     useLive().nasdaqInsert(originNasdaq),
   ]);
+
+  // 현재시간이 정각인지 확인
+  if (new Date().getMinutes() == 0) {
+    await Promise.all([
+      useHistory().seoulInsert(newSeoul),
+      useHistory().kosdaqInsert(newKosdaq),
+      useHistory().nasdaqInsert(newNasdaq),
+    ]);
+  }
 };

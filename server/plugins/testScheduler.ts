@@ -1,10 +1,7 @@
-import { krCollectSave } from "../api/galaxyS7/kr.post";
-import { usCollectSave } from "../api/galaxyS7/us.post";
-
 import { useScheduler } from "#scheduler";
 
 export default defineNitroPlugin(() => {
-  //startScheduler();
+  startScheduler();
 });
 
 function startScheduler() {
@@ -12,8 +9,14 @@ function startScheduler() {
 
   scheduler
     .run(async () => {
-      await krCollectSave();
-      await usCollectSave();
+      console.time("collection");
+      try {
+        await useCollection();
+        console.timeEnd("collection");
+      } catch (error) {
+        console.error(error);
+        console.timeEnd("collection");
+      }
     })
     // 매분 실행하도록
     .everyMinute();

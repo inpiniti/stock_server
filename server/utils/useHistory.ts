@@ -1,5 +1,3 @@
-import { sql } from "drizzle-orm";
-
 export const useHistory = () => {
   const seoulInsert = async (data: any) => {
     try {
@@ -15,6 +13,20 @@ export const useHistory = () => {
       return true;
     } catch (error) {
       return false;
+    }
+  };
+
+  const seoulOneHourSelect = async () => {
+    try {
+      const result = await useGalaxy()
+        .select(pgTableSeoul)
+        .where({})
+        .orderBy("id", "desc")
+        .limit(60)
+        .run();
+      return result;
+    } catch (error) {
+      return [];
     }
   };
 
@@ -50,5 +62,11 @@ export const useHistory = () => {
     } catch (error) {
       return false;
     }
+  };
+
+  return {
+    seoulInsert,
+    kosdaqInsert,
+    nasdaqInsert,
   };
 };
