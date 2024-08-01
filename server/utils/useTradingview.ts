@@ -363,10 +363,14 @@ export const useTradingview = () => {
 
     return {
       seoul: kr_crawling.filter((item: any) => {
-        return seoulSelect.includes(item.name);
+        return seoulSelect
+          .map((item: any) => item.stock_code)
+          .includes(item.name);
       }),
       kosdaq: kr_crawling.filter((item: any) => {
-        return kosdaqSelect.includes(item.name);
+        return kosdaqSelect
+          .map((item: any) => item.stock_code)
+          .includes(item.name);
       }),
     };
   };
@@ -379,7 +383,9 @@ export const useTradingview = () => {
 
     return {
       nasdaq: us_crawling.filter((item: any) => {
-        return nasdaqSelect.includes(item.name);
+        return nasdaqSelect
+          .map((item: any) => item.stock_code)
+          .includes(item.name);
       }),
     };
   };

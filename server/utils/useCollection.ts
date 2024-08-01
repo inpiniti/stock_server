@@ -4,10 +4,20 @@ export const useCollection = async () => {
     useLive().newUs(),
   ]);
 
-  const { newSeoul, newKosdaq } = krResult;
-  const { newNasdaq } = usResult;
+  const { newSeoul, newKosdaq, originKosdaq, originSeoul } = krResult;
+  const { newNasdaq, originNasdaq } = usResult;
 
-  useLive().seoulInsert(newSeoul);
-  useLive().kosdaqInsert(newKosdaq);
-  useLive().nasdaqInsert(newNasdaq);
+  console.log("newSeoul", newSeoul.length);
+  console.log("newKosdaq", newKosdaq.length);
+  console.log("newNasdaq", newNasdaq.length);
+
+  console.log("originSeoul", originSeoul.length);
+  console.log("originKosdaq", originKosdaq.length);
+  console.log("originNasdaq", originNasdaq.length);
+
+  await Promise.all([
+    useLive().seoulInsert(originSeoul),
+    useLive().kosdaqInsert(originKosdaq),
+    useLive().nasdaqInsert(originNasdaq),
+  ]);
 };
