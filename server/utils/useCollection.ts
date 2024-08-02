@@ -30,5 +30,6 @@ export const useCollection = async () => {
       useHistory().kosdaqInsert(newKosdaq),
       useHistory().nasdaqInsert(newNasdaq),
     ]);
+    await Promise.all([useHistory().seoulOneHourUpdate(newSeoul)]);
   }
 };

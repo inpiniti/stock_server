@@ -19,7 +19,7 @@ export const useHistory = () => {
   };
 
   const seoulOneHourSelect = async () => {
-    const sql_str = `select * 
+    const sql_str = `select name, close, created_at
                        from seoul 
                       where DATE_TRUNC('hour', seoul.created_at) = DATE_TRUNC('hour', TIMESTAMP '${oneHourAgo()}')`;
 
@@ -28,7 +28,6 @@ export const useHistory = () => {
 
   const seoulOneHourUpdate = async (currentSeoulList: any[]) => {
     try {
-      // 현재시간 기준으로 1시간 전 데이터를 조회합니다.
       const prevSeoulList: any = await seoulOneHourSelect();
 
       await useGalaxy().transaction(async (trx: any) => {
@@ -96,5 +95,6 @@ export const useHistory = () => {
     kosdaqInsert,
     nasdaqInsert,
     seoulOneHourSelect,
+    seoulOneHourUpdate,
   };
 };
