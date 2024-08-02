@@ -60,27 +60,7 @@ const updateByTimeFrame = async (
 };
 
 export const useHistory = () => {
-  const seoulInsert = async (data: any) => {
-    try {
-      const firstRowParamCount = Object.keys(data[0]).length; // 첫 번째 행의 파라미터 수를 계산합니다.
-      const chunkSize = Math.floor(65534 / firstRowParamCount); // 83은 각 행의 파라미터 수입니다.
-      const dataChunks = splitData(data, chunkSize);
-
-      // 분할된 데이터 삽입
-      for (const chunk of dataChunks) {
-        await useGalaxy().insert(pgTableSeoul).values(chunk);
-      }
-
-      return true;
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const seoulOneHourSelect = async () =>
-    await selectByTimeFrame("seoul", "hour");
-
-  const seoulOneDaySelect = async () => await selectByTimeFrame("seoul", "day");
+  const seoulInsert = async (data: any) => await insertData(pgTableSeoul, data);
 
   const seoulOneHourUpdate = async (currentSeoulList: any[]) =>
     await updateByTimeFrame("seoul", "hour", currentSeoulList);
@@ -91,12 +71,6 @@ export const useHistory = () => {
   const kosdaqInsert = async (data: any) =>
     await insertData(pgTableKosdaq, data);
 
-  const kosdaqOneHourSelect = async () =>
-    await selectByTimeFrame("kosdaq", "hour");
-
-  const kosdaqOneDaySelect = async () =>
-    await selectByTimeFrame("kosdaq", "day");
-
   const kosdaqOneHourUpdate = async (currentKosdaqList: any[]) =>
     await updateByTimeFrame("kosdaq", "hour", currentKosdaqList);
 
@@ -105,12 +79,6 @@ export const useHistory = () => {
 
   const nasdaqInsert = async (data: any) =>
     await insertData(pgTableNasdaq, data);
-
-  const nasdaqOneHourSelect = async () =>
-    await selectByTimeFrame("nasdaq", "hour");
-
-  const nasdaqOneDaySelect = async () =>
-    await selectByTimeFrame("nasdaq", "day");
 
   const nasdaqOneHourUpdate = async (currentNasdaqList: any[]) =>
     await updateByTimeFrame("nasdaq", "hour", currentNasdaqList);
