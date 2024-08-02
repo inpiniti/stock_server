@@ -47,7 +47,7 @@ export const useInfo = () => {
 
       return data;
     } catch (error) {
-      return error;
+      throw error;
     }
   };
 

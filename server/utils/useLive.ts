@@ -12,7 +12,7 @@ export const useLive = () => {
       const data = await useGalaxy().select().from(pgTableSeoulLive);
       return data;
     } catch (error) {
-      return false;
+      throw error;
     }
   };
   const seoulInsert = async (data: any) => {
@@ -29,7 +29,7 @@ export const useLive = () => {
 
       return true;
     } catch (error) {
-      return false;
+      throw error;
     }
   };
   const kosdaqSelect = async () => {
@@ -37,7 +37,7 @@ export const useLive = () => {
       const data = await useGalaxy().select().from(pgTableKosdaqLive);
       return data;
     } catch (error) {
-      return false;
+      throw error;
     }
   };
   const kosdaqInsert = async (data: any) => {
@@ -54,7 +54,7 @@ export const useLive = () => {
 
       return true;
     } catch (error) {
-      return false;
+      throw error;
     }
   };
   const nasdaqSelect = async () => {
@@ -62,7 +62,7 @@ export const useLive = () => {
       const data = await useGalaxy().select().from(pgTableNasdaqLive);
       return data;
     } catch (error) {
-      return false;
+      throw error;
     }
   };
   const nasdaqInsert = async (data: any) => {
@@ -79,7 +79,7 @@ export const useLive = () => {
 
       return true;
     } catch (error) {
-      return false;
+      throw error;
     }
   };
 

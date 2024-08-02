@@ -14,7 +14,7 @@ export const useHistory = () => {
 
       return true;
     } catch (error) {
-      return false;
+      throw error;
     }
   };
 
@@ -51,8 +51,7 @@ export const useHistory = () => {
 
       return true;
     } catch (error) {
-      console.error(error); // 에러 로그를 출력합니다.
-      return false;
+      throw error;
     }
   };
 
@@ -69,7 +68,7 @@ export const useHistory = () => {
 
       return true;
     } catch (error) {
-      return false;
+      throw error;
     }
   };
 
@@ -86,7 +85,7 @@ export const useHistory = () => {
 
       return true;
     } catch (error) {
-      return false;
+      throw error;
     }
   };
 
