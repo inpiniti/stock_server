@@ -30,8 +30,13 @@ export const useCollection = async () => {
         useHistory().seoulInsert(newSeoul),
         useHistory().kosdaqInsert(newKosdaq),
         useHistory().nasdaqInsert(newNasdaq),
+        useHistory().seoulOneHourUpdate(newSeoul),
+        useHistory().kosdaqOneHourUpdate(newKosdaq),
+        useHistory().nasdaqOneHourUpdate(newNasdaq),
+        useHistory().seoulOneDayUpdate(newSeoul),
+        useHistory().kosdaqOneDayUpdate(newKosdaq),
+        useHistory().nasdaqOneDayUpdate(newNasdaq),
       ]);
-      await Promise.all([useHistory().seoulOneHourUpdate(newSeoul)]);
     }
   } catch (error) {
     throw error;
