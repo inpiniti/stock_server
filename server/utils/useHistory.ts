@@ -2,6 +2,7 @@ import { eq, sql } from "drizzle-orm";
 
 // Abstracted insert function
 const insertData = async (tableName: any, data: any) => {
+  if (data.length == 0) return false;
   try {
     const firstRowParamCount = Object.keys(data[0]).length;
     const chunkSize = Math.floor(65534 / firstRowParamCount);
