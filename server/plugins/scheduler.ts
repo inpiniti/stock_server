@@ -1,7 +1,9 @@
 import { useScheduler } from "#scheduler";
 
 export default defineNitroPlugin(() => {
-  startScheduler();
+  if (process.env.NODE_ENV == "production") {
+    startScheduler();
+  }
 });
 
 function startScheduler() {
