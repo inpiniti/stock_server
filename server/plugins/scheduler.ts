@@ -24,4 +24,16 @@ function startScheduler() {
     .everyMinute();
   // 10분 주기
   //.everyTenMinutes();
+
+  // 18:00:30에 실행
+  scheduler
+    .run(async () => {
+      await useInfo().truncate();
+      await Promise.all([
+        useInfo().seoulInsert(),
+        useInfo().kosdaqInsert(),
+        useInfo().nasdaqInsert(),
+      ]);
+    })
+    .cron("30 0 18 * * *");
 }
