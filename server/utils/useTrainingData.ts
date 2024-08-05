@@ -99,6 +99,38 @@ const AgoTypeNasdaqFiled: any = {
 
 import { eq, and, isNotNull } from "drizzle-orm";
 
+// Generic function to get sector data
+const getSectorData = async (ago: AgoType, sector: string) => {
+  const [seoul, kosdaq, nasdaq] = await Promise.all([
+    useGalaxy()
+      .select()
+      .from(pgTableSeoul)
+      .where(
+        and(isNotNull(AgoTypeSeoulFiled[ago]), eq(pgTableSeoul.sector, sector))
+      ),
+    useGalaxy()
+      .select()
+      .from(pgTableKosdaq)
+      .where(
+        and(
+          isNotNull(AgoTypeKosdaqFiled[ago]),
+          eq(pgTableKosdaq.sector, sector)
+        )
+      ),
+    useGalaxy()
+      .select()
+      .from(pgTableNasdaq)
+      .where(
+        and(
+          isNotNull(AgoTypeNasdaqFiled[ago]),
+          eq(pgTableNasdaq.sector, sector)
+        )
+      ),
+  ]);
+
+  return [...seoul, ...kosdaq, ...nasdaq];
+};
+
 export const useTrainingData = () => {
   const getSoeul = async (ago: AgoType) => {
     return await useGalaxy()
@@ -120,51 +152,64 @@ export const useTrainingData = () => {
   };
 
   //Communications
-  const getCommunications = async (ago: AgoType) => {
-    const seoul = await useGalaxy()
-      .select()
-      .from(pgTableSeoul)
-      .whereNotNull(`change_${ago}`)
-      .andWhere("sector", "Communications");
-  };
+  const getCommunications = async (ago: AgoType) =>
+    getSectorData(ago, "Communications");
   //Energy Minerals
-  const getEnergyMinerals = async (ago: AgoType) => {};
+  const getEnergyMinerals = async (ago: AgoType) =>
+    getSectorData(ago, "Energy Minerals");
+
   // Health Technology
-  const getHealthTechnology = async (ago: AgoType) => {};
+  const getHealthTechnology = async (ago: AgoType) =>
+    getSectorData(ago, "Health Technology");
   // Non-Energy Minerals
-  const getNonEnergyMinerals = async (ago: AgoType) => {};
+  const getNonEnergyMinerals = async (ago: AgoType) =>
+    getSectorData(ago, "Non-Energy Minerals");
   // Utilities
-  const getUtilities = async (ago: AgoType) => {};
+  const getUtilities = async (ago: AgoType) => getSectorData(ago, "Utilities");
   // Consumer Durables
-  const getConsumerDurables = async (ago: AgoType) => {};
+  const getConsumerDurables = async (ago: AgoType) =>
+    getSectorData(ago, "Consumer Durables");
   // Technology Services
-  const getTechnologyServices = async (ago: AgoType) => {};
+  const getTechnologyServices = async (ago: AgoType) =>
+    getSectorData(ago, "Technology Services");
   // Distribution Services
-  const getDistributionServices = async (ago: AgoType) => {};
+  const getDistributionServices = async (ago: AgoType) =>
+    getSectorData(ago, "Distribution Services");
   // Finance
-  const getFinance = async (ago: AgoType) => {};
+  const getFinance = async (ago: AgoType) => getSectorData(ago, "Finance");
   // Consumer Services
-  const getConsumerServices = async (ago: AgoType) => {};
+  const getConsumerServices = async (ago: AgoType) =>
+    getSectorData(ago, "Consumer Services");
   // Process Industries
-  const getProcessIndustries = async (ago: AgoType) => {};
+  const getProcessIndustries = async (ago: AgoType) =>
+    getSectorData(ago, "Process Industries");
   // Producer Manufacturing
-  const getProducerManufacturing = async (ago: AgoType) => {};
+  const getProducerManufacturing = async (ago: AgoType) =>
+    getSectorData(ago, "Producer Manufacturing");
   // Commercial Services
-  const getCommercialServices = async (ago: AgoType) => {};
+  const getCommercialServices = async (ago: AgoType) =>
+    getSectorData(ago, "Commercial Services");
   // Industrial Services
-  const getIndustrialServices = async (ago: AgoType) => {};
+  const getIndustrialServices = async (ago: AgoType) =>
+    getSectorData(ago, "Industrial Services");
   // Transportation
-  const getTransportation = async (ago: AgoType) => {};
+  const getTransportation = async (ago: AgoType) =>
+    getSectorData(ago, "Transportation");
   // Miscellaneous
-  const getMiscellaneous = async (ago: AgoType) => {};
+  const getMiscellaneous = async (ago: AgoType) =>
+    getSectorData(ago, "Miscellaneous");
   // Consumer Non-Durables
-  const getConsumerNonDurables = async (ago: AgoType) => {};
+  const getConsumerNonDurables = async (ago: AgoType) =>
+    getSectorData(ago, "Consumer Non-Durables");
   // Health Services
-  const getHealthServices = async (ago: AgoType) => {};
+  const getHealthServices = async (ago: AgoType) =>
+    getSectorData(ago, "Health Services");
   // Retail Trade
-  const getRetailTrade = async (ago: AgoType) => {};
+  const getRetailTrade = async (ago: AgoType) =>
+    getSectorData(ago, "Retail Trade");
   // Electronic Technology
-  const getElectronicTechnology = async (ago: AgoType) => {};
+  const getElectronicTechnology = async (ago: AgoType) =>
+    getSectorData(ago, "Electronic Technology");
 
   return {
     getSoeul,

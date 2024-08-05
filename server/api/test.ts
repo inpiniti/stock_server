@@ -1,3 +1,3 @@
 export default defineEventHandler(async (event) => {
-  return await useHistory().seoulOneHourSelect();
+  return await useTrainingData().getNasdaq("h1");
 });
