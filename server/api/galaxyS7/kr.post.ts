@@ -122,6 +122,7 @@ export const krCollectSave = async () => {
 
     return "success";
   } catch (error) {
+    console.error(error);
     return error;
   }
 };

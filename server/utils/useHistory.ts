@@ -12,6 +12,7 @@ const insertData = async (tableName: any, data: any) => {
     }
     return true;
   } catch (error) {
+    console.error(error);
     throw error;
   }
 };
@@ -107,6 +108,7 @@ const updateByTimeFrame = async (
     });
     return true;
   } catch (error) {
+    console.error(error);
     throw error;
   }
 };

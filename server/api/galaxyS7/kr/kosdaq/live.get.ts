@@ -3,6 +3,7 @@ export default defineEventHandler(async (event) => {
     const data = await useGalaxy().select().from(pgTableKrKosdaqLive);
     return data;
   } catch (error) {
+    console.error(error);
     return error;
   }
 });

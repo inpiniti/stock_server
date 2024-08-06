@@ -22,6 +22,8 @@ export const useCollection = async () => {
 
     // 현재시간이 정각인지 확인
     if (new Date().getMinutes() == 0) {
+      console.log("정각 주기 실행");
+
       console.log("newSeoul", newSeoul.length);
       console.log("newKosdaq", newKosdaq.length);
       console.log("newNasdaq", newNasdaq.length);
@@ -39,6 +41,7 @@ export const useCollection = async () => {
       ]);
     }
   } catch (error) {
+    console.error(error);
     throw error;
   }
 };

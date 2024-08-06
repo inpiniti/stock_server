@@ -118,6 +118,7 @@ export const useLearning = () => {
       }
       return true;
     } catch (error) {
+      console.error(error);
       throw error;
     }
   };
@@ -133,6 +134,7 @@ export const useLearning = () => {
         );
       return data;
     } catch (error) {
+      console.error(error);
       throw error;
     }
   };
@@ -168,10 +170,9 @@ export const useLearning = () => {
   };
 
   // 모든 색터, 시간에 대해 학습
-  const runAll = () => {
-    console.log("hellow wolrd");
-    console.time("runAll");
-    const _sectors = [
+  const runAll = async () => {
+    const sectors = [
+      "all",
       "seoul",
       "kosdaq",
       "nasdaq",
@@ -197,44 +198,37 @@ export const useLearning = () => {
       "electronicTechnology",
     ];
 
-    // const agos = [
-    //   "h1",
-    //   "d1",
-    //   "d2",
-    //   "d3",
-    //   "d4",
-    //   "d5",
-    //   "d6",
-    //   "1w",
-    //   "2w",
-    //   "3w",
-    //   "4w",
-    //   "1m",
-    //   "2m",
-    //   "3m",
-    //   "4m",
-    //   "5m",
-    //   "6m",
-    //   "7m",
-    //   "8m",
-    //   "9m",
-    //   "10m",
-    //   "11m",
-    // ];
+    const agos = [
+      "h1",
+      "d1",
+      "d2",
+      "d3",
+      "d4",
+      "d5",
+      "d6",
+      "1w",
+      "2w",
+      "3w",
+      "4w",
+      "1m",
+      "2m",
+      "3m",
+      "4m",
+      "5m",
+      "6m",
+      "7m",
+      "8m",
+      "9m",
+      "10m",
+      "11m",
+    ];
 
-    // // for (const sector of sectors) {
-    // //   //   for (const ago of agos) {
-    // //   //     console.log(`Running for sector: ${sector}, ago: ${ago}`); // Debugging log
-    // //   //     //await run(sector, ago as AgoType);
-    // //   //   }
-    // // }
-    for (let i = 0; i < _sectors.length; i++) {
-      console.log("runAll", `sector`);
+    for (const sector of sectors) {
+      for (const ago of agos) {
+        console.log(`Running for sector: ${sector}, ago: ${ago}`); // Debugging log
+        await run(sector, ago as AgoType);
+      }
     }
-
-    // agos.forEach((ago) => {
-    //   console.log(ago);
-    // });
   };
 
   return {
@@ -243,6 +237,7 @@ export const useLearning = () => {
 };
 
 const sotckDataOnType: { [key: string]: (ago: AgoType) => Promise<any> } = {
+  all: useTrainingData().getAll,
   seoul: useTrainingData().getSoeul,
   kosdaq: useTrainingData().getKosdaq,
   nasdaq: useTrainingData().getNasdaq,

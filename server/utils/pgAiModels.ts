@@ -1,6 +1,6 @@
 import { pgTable, text, numeric } from "drizzle-orm/pg-core";
 
-export const pgAiModel = pgTable("ai_model", {
+export const pgAiModel = pgTable("ai_models", {
   model_id: numeric("model_id").notNull(),
   model: text("model"),
   market_sector: text("market_sector"),

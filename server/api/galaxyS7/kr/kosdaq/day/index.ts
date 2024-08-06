@@ -7,6 +7,7 @@ export default defineEventHandler(async (event) => {
     );
     return data;
   } catch (error) {
+    console.error(error);
     return error;
   }
 });

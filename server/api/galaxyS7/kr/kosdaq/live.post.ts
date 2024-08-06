@@ -19,6 +19,7 @@ export const kosdaq_live_save = async (data: any) => {
 
     return "success";
   } catch (error) {
+    console.error(error);
     return error;
   }
 };

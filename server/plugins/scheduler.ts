@@ -11,9 +11,10 @@ export default defineNitroPlugin(() => {
 function startScheduler() {
   const scheduler = useScheduler();
 
+  // 데이터 수집
   scheduler
     .run(async () => {
-      console.log("10분 주기 실행");
+      console.log("1분 주기 실행");
       console.time("collection");
       try {
         await useCollection();
@@ -28,6 +29,7 @@ function startScheduler() {
   // 10분 주기
   //.everyTenMinutes();
 
+  // 코드정보 수집
   // 18:00:30에 실행
   scheduler
     .run(async () => {
@@ -40,4 +42,13 @@ function startScheduler() {
       ]);
     })
     .cron("30 0 18 * * *");
+
+  // 데이터 학습
+  scheduler.run(async () => {});
+
+  // 학습 테스트
+  (function 테스트() {
+    console.log("모델 학습");
+    useLearning().runAll();
+  })();
 }

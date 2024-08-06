@@ -132,6 +132,14 @@ const getSectorData = async (ago: AgoType, sector: string) => {
 };
 
 export const useTrainingData = () => {
+  const getAll = async (ago: AgoType) => {
+    const [seoul, kosdaq, nasdaq] = await Promise.all([
+      getSoeul(ago),
+      getKosdaq(ago),
+      getNasdaq(ago),
+    ]);
+    return [...seoul, ...kosdaq, ...nasdaq];
+  };
   const getSoeul = async (ago: AgoType) => {
     return await useGalaxy()
       .select()
@@ -212,6 +220,7 @@ export const useTrainingData = () => {
     getSectorData(ago, "Electronic Technology");
 
   return {
+    getAll,
     getSoeul,
     getKosdaq,
     getNasdaq,

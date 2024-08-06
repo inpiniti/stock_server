@@ -67,6 +67,7 @@ export const usCollectSave = async () => {
 
     return "success";
   } catch (error) {
+    console.error(error);
     return error;
   }
 };
