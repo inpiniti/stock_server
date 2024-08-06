@@ -1,7 +1,9 @@
 import { useScheduler } from "#scheduler";
 
 export default defineNitroPlugin(() => {
+  console.log("env", process.env.NODE_ENV);
   if (process.env.NODE_ENV == "production") {
+    console.log("startScheduler");
     startScheduler();
   }
 });
@@ -11,6 +13,7 @@ function startScheduler() {
 
   scheduler
     .run(async () => {
+      console.log("10분 주기 실행");
       console.time("collection");
       try {
         await useCollection();
@@ -28,6 +31,7 @@ function startScheduler() {
   // 18:00:30에 실행
   scheduler
     .run(async () => {
+      console.log("18:00:30에 실행");
       await useInfo().truncate();
       await Promise.all([
         useInfo().seoulInsert(),
