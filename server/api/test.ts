@@ -1,11 +1,15 @@
-export default defineEventHandler(async (event) => {
-  try {
-    //useLearning().runAll();
-    //return true;
-    const data = await useLive().seoulSelect();
-    return data;
-  } catch (error) {
-    console.log("error", error);
-    return error;
-  }
+export default defineEventHandler((event) => {
+  console.log(1);
+  console.log(2);
+  console.log(3);
+  console.log(4);
+  console.log(5);
+  console.log(6);
+  console.log(7);
+  console.log(8);
+  console.log(9);
+  console.log(10);
+  return {
+    hello: "world",
+  };
 });

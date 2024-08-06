@@ -12,22 +12,13 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",
     "@tensorflow/tfjs": "^4.20.0",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.1",
     "drizzle-orm": "^0.29.5",
-    "lucide-vue-next": "^0.417.0",
     "nuxt": "^3.12.4",
     "postgres": "^3.4.4",
-    "radix-vue": "^1.9.2",
-    "shadcn-nuxt": "^0.10.4",
-    "tailwind-merge": "^2.4.0",
-    "tailwindcss-animate": "^1.0.7",
     "vue": "latest"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6.12.1",
     "drizzle-kit": "^0.23.0",
-    "nuxt-scheduler": "^0.1.9",
-    "typescript": "^5.5.4"
+    "nuxt-scheduler": "^0.1.9"
   }
 }
