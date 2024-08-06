@@ -1,4 +1,4 @@
-type AgoType =
+export type AgoType =
   | "h1"
   | "d1"
   | "d2"
