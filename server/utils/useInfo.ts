@@ -14,18 +14,9 @@ export const useInfo = () => {
 
       if (data.length == 0) return false;
 
-      // 데이터 분할
-      // 예를 들어, 각 행이 83개의 파라미터를 사용한다고 가정하면, 최대 6553개의 행을 한 번에 삽입할 수 있습니다.
-      // , 추가적인 여유 100을 두어 계산합니다.
-      // 행도 여유를 두어 90으로 계산합니다.
-      const firstRowParamCount = Object.keys(data[0]).length; // 첫 번째 행의 파라미터 수를 계산합니다.
-      const chunkSize = Math.floor(65534 / firstRowParamCount); // 83은 각 행의 파라미터 수입니다.
-      const dataChunks = splitData(data, chunkSize);
-
-      // 분할된 데이터 삽입
-      for (const chunk of dataChunks) {
+      await processDataInsert(data, async (chunk: any[]) => {
         await useGalaxy().insert(pgTableStockInfo).values(chunk);
-      }
+      });
 
       return true;
     } catch (error) {

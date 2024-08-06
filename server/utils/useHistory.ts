@@ -4,12 +4,10 @@ import { eq, sql } from "drizzle-orm";
 const insertData = async (tableName: any, data: any) => {
   if (data.length == 0) return false;
   try {
-    const firstRowParamCount = Object.keys(data[0]).length;
-    const chunkSize = Math.floor(65534 / firstRowParamCount);
-    const dataChunks = splitData(data, chunkSize);
-    for (const chunk of dataChunks) {
+    await processDataInsert(data, async (chunk: any[]) => {
       await useGalaxy().insert(tableName).values(chunk);
-    }
+    });
+
     return true;
   } catch (error) {
     console.error("error002", error);

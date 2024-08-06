@@ -19,14 +19,9 @@ export const useLive = () => {
   const seoulInsert = async (data: any) => {
     await useGalaxy().execute(sql.raw(`TRUNCATE TABLE seoul_live`));
     try {
-      const firstRowParamCount = Object.keys(data[0]).length; // 첫 번째 행의 파라미터 수를 계산합니다.
-      const chunkSize = Math.floor(65534 / firstRowParamCount); // 83은 각 행의 파라미터 수입니다.
-      const dataChunks = splitData(data, chunkSize);
-
-      // 분할된 데이터 삽입
-      for (const chunk of dataChunks) {
+      await processDataInsert(data, async (chunk: any[]) => {
         await useGalaxy().insert(pgTableSeoulLive).values(chunk);
-      }
+      });
 
       return true;
     } catch (error) {
@@ -46,14 +41,9 @@ export const useLive = () => {
   const kosdaqInsert = async (data: any) => {
     await useGalaxy().execute(sql.raw(`TRUNCATE TABLE kosdaq_live`));
     try {
-      const firstRowParamCount = Object.keys(data[0]).length; // 첫 번째 행의 파라미터 수를 계산합니다.
-      const chunkSize = Math.floor(65534 / firstRowParamCount); // 83은 각 행의 파라미터 수입니다.
-      const dataChunks = splitData(data, chunkSize);
-
-      // 분할된 데이터 삽입
-      for (const chunk of dataChunks) {
+      await processDataInsert(data, async (chunk: any[]) => {
         await useGalaxy().insert(pgTableKosdaqLive).values(chunk);
-      }
+      });
 
       return true;
     } catch (error) {
@@ -73,14 +63,9 @@ export const useLive = () => {
   const nasdaqInsert = async (data: any) => {
     await useGalaxy().execute(sql.raw(`TRUNCATE TABLE nasdaq_live`));
     try {
-      const firstRowParamCount = Object.keys(data[0]).length; // 첫 번째 행의 파라미터 수를 계산합니다.
-      const chunkSize = Math.floor(65534 / firstRowParamCount); // 83은 각 행의 파라미터 수입니다.
-      const dataChunks = splitData(data, chunkSize);
-
-      // 분할된 데이터 삽입
-      for (const chunk of dataChunks) {
+      await processDataInsert(data, async (chunk: any[]) => {
         await useGalaxy().insert(pgTableNasdaqLive).values(chunk);
-      }
+      });
 
       return true;
     } catch (error) {
