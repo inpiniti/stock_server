@@ -41,7 +41,7 @@ export const useCollection = async () => {
       ]);
     }
   } catch (error) {
-    console.error(error);
+    console.error("error001", error);
     throw error;
   }
 };

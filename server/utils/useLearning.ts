@@ -118,7 +118,7 @@ export const useLearning = () => {
       }
       return true;
     } catch (error) {
-      console.error(error);
+      console.error("error006", error);
       throw error;
     }
   };
@@ -134,7 +134,7 @@ export const useLearning = () => {
         );
       return data;
     } catch (error) {
-      console.error(error);
+      console.error("error007", error);
       throw error;
     }
   };

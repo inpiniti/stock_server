@@ -12,7 +12,7 @@ export const useLive = () => {
       const data = await useGalaxy().select().from(pgTableSeoulLive);
       return data;
     } catch (error) {
-      console.error(error);
+      console.error("error008", error);
       throw error;
     }
   };
@@ -30,7 +30,7 @@ export const useLive = () => {
 
       return true;
     } catch (error) {
-      console.error(error);
+      console.error("error009", error);
       throw error;
     }
   };
@@ -39,7 +39,7 @@ export const useLive = () => {
       const data = await useGalaxy().select().from(pgTableKosdaqLive);
       return data;
     } catch (error) {
-      console.error(error);
+      console.error("error010", error);
       throw error;
     }
   };
@@ -57,7 +57,7 @@ export const useLive = () => {
 
       return true;
     } catch (error) {
-      console.error(error);
+      console.error("error011", error);
       throw error;
     }
   };
@@ -66,7 +66,7 @@ export const useLive = () => {
       const data = await useGalaxy().select().from(pgTableNasdaqLive);
       return data;
     } catch (error) {
-      console.error(error);
+      console.error("error012", error);
       throw error;
     }
   };
@@ -84,7 +84,7 @@ export const useLive = () => {
 
       return true;
     } catch (error) {
-      console.error(error);
+      console.error("error013", error);
       throw error;
     }
   };

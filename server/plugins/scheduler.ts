@@ -14,14 +14,15 @@ function startScheduler() {
   // 데이터 수집
   scheduler
     .run(async () => {
+      const uniqueLabel = `collection-${new Date().toISOString()}`;
       console.log("1분 주기 실행");
-      console.time("collection");
+      console.time(uniqueLabel);
       try {
         await useCollection();
-        console.timeEnd("collection");
+        console.timeEnd(uniqueLabel);
       } catch (error) {
         console.error(error);
-        console.timeEnd("collection");
+        console.timeEnd(uniqueLabel);
       }
     })
     // 매분 실행하도록

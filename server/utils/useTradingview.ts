@@ -349,7 +349,7 @@ export const useTradingview = () => {
 
       return data.map((item: any) => toSnakeCase(item));
     } catch (error) {
-      console.error(error);
+      console.error("error014", error);
       throw error;
     }
   };
