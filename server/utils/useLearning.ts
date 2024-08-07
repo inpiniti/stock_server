@@ -95,6 +95,13 @@ export const useLearning = () => {
   // 모델 저장
   const save = async (model: any, sotckType: string, ago: AgoType) => {
     try {
+      if (model instanceof tf.model) {
+        // model.save()를 여기서 안전하게 호출할 수 있습니다.
+        console.log("model is an instance of tf.Model");
+      } else {
+        console.error("model is not an instance of tf.Model");
+      }
+
       // 불러오기 후 있으면 업데이트
       const data = await load(sotckType, ago);
       // 없으면 새로 생성

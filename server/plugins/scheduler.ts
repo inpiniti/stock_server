@@ -45,11 +45,11 @@ function startScheduler() {
     .cron("30 0 18 * * *");
 
   // 데이터 학습
-  scheduler.run(async () => {});
+  //scheduler.run(async () => {});
 
   // 학습 테스트
-  (function 테스트() {
-    console.log("모델 학습");
-    useLearning().runAll();
-  })();
+  // (function 테스트() {
+  //   console.log("모델 학습");
+  //   useLearning().runAll();
+  // })();
 }
