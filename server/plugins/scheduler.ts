@@ -34,8 +34,8 @@ function startScheduler() {
   //scheduler.run(async () => {});
 
   // 학습 테스트
-  // (function 테스트() {
-  //   console.log("모델 학습");
-  //   useLearning().runAll();
-  // })();
+  (function 테스트() {
+    console.log("모델 학습");
+    useLearning().runAll();
+  })();
 }
