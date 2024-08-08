@@ -30,20 +30,6 @@ function startScheduler() {
   // 10분 주기
   //.everyTenMinutes();
 
-  // 코드정보 수집
-  // 18:00:30에 실행
-  scheduler
-    .run(async () => {
-      console.log("18:00:30에 실행");
-      await useInfo().truncate();
-      await Promise.all([
-        useInfo().seoulInsert(),
-        useInfo().kosdaqInsert(),
-        useInfo().nasdaqInsert(),
-      ]);
-    })
-    .cron("30 0 18 * * *");
-
   // 데이터 학습
   //scheduler.run(async () => {});
 
