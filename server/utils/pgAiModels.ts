@@ -5,6 +5,7 @@ export const pgAiModel = pgTable("ai_models", {
   model: text("model"),
   market_sector: text("market_sector"),
   ago: text("ago"),
+  weights: text("weights"), // weights 필드 추가
 });
 
 // CREATE TABLE public.ai_models (

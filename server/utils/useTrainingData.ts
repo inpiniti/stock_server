@@ -6,21 +6,21 @@ export type AgoType =
   | "d4"
   | "d5"
   | "d6"
-  | "1w"
-  | "2w"
-  | "3w"
-  | "4w"
-  | "1m"
-  | "2m"
-  | "3m"
-  | "4m"
-  | "5m"
-  | "6m"
-  | "7m"
-  | "8m"
-  | "9m"
-  | "10m"
-  | "11m";
+  | "w1"
+  | "w2"
+  | "w3"
+  | "w4"
+  | "m1"
+  | "m2"
+  | "m3"
+  | "m4"
+  | "m5"
+  | "m6"
+  | "m7"
+  | "m8"
+  | "m9"
+  | "m10"
+  | "m11";
 
 const AgoTypeSeoulFiled: any = {
   h1: pgTableSeoul.change_1h,
@@ -141,22 +141,25 @@ export const useTrainingData = () => {
     return [...seoul, ...kosdaq, ...nasdaq];
   };
   const getSoeul = async (ago: AgoType) => {
-    return await useGalaxy()
+    const query = useGalaxy()
       .select()
       .from(pgTableSeoul)
       .where(isNotNull(AgoTypeSeoulFiled[ago]));
+    return await query;
   };
   const getKosdaq = async (ago: AgoType) => {
-    return await useGalaxy()
+    const query = useGalaxy()
       .select()
       .from(pgTableKosdaq)
       .where(isNotNull(AgoTypeKosdaqFiled[ago]));
+    return await query;
   };
   const getNasdaq = async (ago: AgoType) => {
-    return await useGalaxy()
+    const query = useGalaxy()
       .select()
       .from(pgTableNasdaq)
       .where(isNotNull(AgoTypeNasdaqFiled[ago]));
+    return await query;
   };
 
   //Communications

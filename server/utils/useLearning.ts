@@ -1,4 +1,4 @@
-import * as tf from "@tensorflow/tfjs";
+import * as tf from "@tensorflow/tfjs-node";
 import { pgAiModel } from "./pgAiModels";
 import { eq, and } from "drizzle-orm";
 
@@ -95,29 +95,40 @@ export const useLearning = () => {
   // 모델 저장
   const save = async (model: any, sotckType: string, ago: AgoType) => {
     try {
-      if (model instanceof tf.model) {
+      if (model instanceof tf.LayersModel) {
         // model.save()를 여기서 안전하게 호출할 수 있습니다.
         console.log("model is an instance of tf.Model");
       } else {
         console.error("model is not an instance of tf.Model");
       }
 
+      // 모델을 JSON 형태로 직렬화
+      const modelJson = await model.toJSON();
+      const modelWeights = await model.getWeights(); // 가중치를 가져옵니다.
+      const serializedWeights = modelWeights.map((weight: any) =>
+        weight.dataSync()
+      ); // 가중치를 직렬화합니다.
+
+      console.log("serializedWeights", serializedWeights);
+
+      const weightsJson = JSON.stringify(Array.from(serializedWeights));
+
       // 불러오기 후 있으면 업데이트
       const data = await load(sotckType, ago);
       // 없으면 새로 생성
       if (data.length == 0) {
-        await useGalaxy()
-          .insert(pgAiModel)
-          .values({
-            model: await model.save(),
-            market_sector: sotckType,
-            ago: ago,
-          });
+        await useGalaxy().insert(pgAiModel).values({
+          model: modelJson,
+          weights: weightsJson,
+          market_sector: sotckType,
+          ago: ago,
+        });
       } else {
         await useGalaxy()
           .update(pgAiModel)
           .set({
-            model: await model.save(),
+            model: modelJson,
+            weights: weightsJson,
           })
           .where(
             and(eq(pgAiModel.market_sector, sotckType), eq(pgAiModel.ago, ago))
@@ -213,21 +224,21 @@ export const useLearning = () => {
       "d4",
       "d5",
       "d6",
-      "1w",
-      "2w",
-      "3w",
-      "4w",
-      "1m",
-      "2m",
-      "3m",
-      "4m",
-      "5m",
-      "6m",
-      "7m",
-      "8m",
-      "9m",
-      "10m",
-      "11m",
+      "w1",
+      "w2",
+      "w3",
+      "w4",
+      "m1",
+      "m2",
+      "m3",
+      "m4",
+      "m5",
+      "m6",
+      "m7",
+      "m8",
+      "m9",
+      "m10",
+      "m11",
     ];
 
     for (const sector of sectors) {
