@@ -109,8 +109,6 @@ export const useLearning = () => {
         weight.dataSync()
       ); // 가중치를 직렬화합니다.
 
-      console.log("serializedWeights", serializedWeights);
-
       const weightsJson = JSON.stringify(Array.from(serializedWeights));
 
       // 불러오기 후 있으면 업데이트
