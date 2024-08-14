@@ -115,22 +115,36 @@ export const useLearning = () => {
       const data = await load(sotckType, ago);
       // 없으면 새로 생성
       if (data.length == 0) {
-        await useGalaxy().insert(pgAiModel).values({
+        await useSupabase().from("ai_models").insert({
           model: modelJson,
           weights: weightsJson,
           market_sector: sotckType,
           ago: ago,
         });
+        // await useGalaxy().insert(pgAiModel).values({
+        //   model: modelJson,
+        //   weights: weightsJson,
+        //   market_sector: sotckType,
+        //   ago: ago,
+        // });
       } else {
-        await useGalaxy()
-          .update(pgAiModel)
-          .set({
+        await useSupabase()
+          .from("ai_models")
+          .update({
             model: modelJson,
             weights: weightsJson,
           })
-          .where(
-            and(eq(pgAiModel.market_sector, sotckType), eq(pgAiModel.ago, ago))
-          );
+          .eq("market_sector", sotckType)
+          .eq("ago", ago);
+        // await useGalaxy()
+        //   .update(pgAiModel)
+        //   .set({
+        //     model: modelJson,
+        //     weights: weightsJson,
+        //   })
+        //   .where(
+        //     and(eq(pgAiModel.market_sector, sotckType), eq(pgAiModel.ago, ago))
+        //   );
       }
       return true;
     } catch (error) {
@@ -142,12 +156,17 @@ export const useLearning = () => {
   // 모델 불러오기
   const load = async (sotckType: string, ago: AgoType) => {
     try {
-      const data = await useGalaxy()
-        .select()
-        .from(pgAiModel)
-        .where(
-          and(eq(pgAiModel.market_sector, sotckType), eq(pgAiModel.ago, ago))
-        );
+      const data = await useSupabase()
+        .from("ai_models")
+        .select("*")
+        .eq("market_sector", sotckType)
+        .eq("ago", ago);
+      // const data = await useGalaxy()
+      //   .select()
+      //   .from(pgAiModel)
+      //   .where(
+      //     and(eq(pgAiModel.market_sector, sotckType), eq(pgAiModel.ago, ago))
+      //   );
       return data;
     } catch (error) {
       console.error("error007", error);
