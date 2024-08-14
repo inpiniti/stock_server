@@ -113,14 +113,24 @@ export const useLearning = () => {
 
       // 불러오기 후 있으면 업데이트
       const data = await load(sotckType, ago);
+
+      console.log("data.length", data.length);
+      console.log("data.length == 0", data.length == 0);
+      console.log("modelJson", modelJson.slice(0, 100) + "...");
+      console.log("weightsJson", weightsJson.slice(0, 100) + "...");
       // 없으면 새로 생성
-      if (data.length == 0) {
-        await useSupabase().from("ai_models").insert({
-          model: modelJson,
-          weights: weightsJson,
-          market_sector: sotckType,
-          ago: ago,
-        });
+      if (data == undefined || data.length == undefined || data.length == 0) {
+        const { data, error } = await useSupabase()
+          .from("ai_models")
+          .insert({
+            model: modelJson,
+            weights: weightsJson,
+            market_sector: sotckType,
+            ago: ago,
+          })
+          .select();
+        console.log("model insert data", data.slice(0, 100) + "...");
+        console.log("model insert error", error);
         // await useGalaxy().insert(pgAiModel).values({
         //   model: modelJson,
         //   weights: weightsJson,
@@ -128,14 +138,17 @@ export const useLearning = () => {
         //   ago: ago,
         // });
       } else {
-        await useSupabase()
+        const { data, error } = await useSupabase()
           .from("ai_models")
           .update({
             model: modelJson,
             weights: weightsJson,
           })
           .eq("market_sector", sotckType)
-          .eq("ago", ago);
+          .eq("ago", ago)
+          .select();
+        console.log("model update data", data.slice(0, 100) + "...");
+        console.log("model update error", error);
         // await useGalaxy()
         //   .update(pgAiModel)
         //   .set({
