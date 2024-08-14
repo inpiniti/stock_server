@@ -3,11 +3,17 @@ import postgres from "postgres";
 
 // u0_a116
 
-const ip = "116.121.7.117";
-const port = "5432";
-const user = "inpiniti";
-const password = "wjd53850";
-const database = "inpiniti";
+//const ip = "116.121.7.117";
+//const port = "5432";
+//const user = "inpiniti";
+//const password = "wjd53850";
+//const database = "inpiniti";
+
+const ip = "ecomarinesys.iptime.org";
+const port = "3030";
+const user = "postgres";
+const password = "!Wjd53850";
+const database = "postgres";
 const url = `postgres://${user}:${password}@${ip}:${port}/${database}`;
 
 let db: any;
