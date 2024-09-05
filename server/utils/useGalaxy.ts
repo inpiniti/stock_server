@@ -9,8 +9,8 @@ import postgres from "postgres";
 //const password = "wjd53850";
 //const database = "inpiniti";
 
-const ip = "ecomarinesys.iptime.org";
-const port = "3030";
+const ip = "192.168.0.118";
+const port = "5432";
 const user = "postgres";
 const password = "!Wjd53850";
 const database = "postgres";

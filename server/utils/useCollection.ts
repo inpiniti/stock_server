@@ -32,12 +32,65 @@ export const useCollection = async () => {
         useHistory().seoulInsert(newSeoul),
         useHistory().kosdaqInsert(newKosdaq),
         useHistory().nasdaqInsert(newNasdaq),
+
         useHistory().seoulOneHourUpdate(newSeoul),
         useHistory().kosdaqOneHourUpdate(newKosdaq),
         useHistory().nasdaqOneHourUpdate(newNasdaq),
+
         useHistory().seoulOneDayUpdate(newSeoul),
         useHistory().kosdaqOneDayUpdate(newKosdaq),
         useHistory().nasdaqOneDayUpdate(newNasdaq),
+      ]);
+
+      await Promise.all([
+        useHistory().seoulTwoDaysUpdate(newSeoul),
+        useHistory().seoulThreeDaysUpdate(newSeoul),
+        useHistory().seoulFourDaysUpdate(newSeoul),
+        useHistory().seoulFiveDaysUpdate(newSeoul),
+        useHistory().seoulSixDaysUpdate(newSeoul),
+      ]);
+
+      await Promise.all([
+        useHistory().kosdaqTwoDaysUpdate(newKosdaq),
+        useHistory().kosdaqThreeDaysUpdate(newKosdaq),
+        useHistory().kosdaqFourDaysUpdate(newKosdaq),
+        useHistory().kosdaqFiveDaysUpdate(newKosdaq),
+        useHistory().kosdaqSixDaysUpdate(newKosdaq),
+      ]);
+
+      await Promise.all([
+        useHistory().nasdaqTwoDaysUpdate(newNasdaq),
+        useHistory().nasdaqThreeDaysUpdate(newNasdaq),
+        useHistory().nasdaqFourDaysUpdate(newNasdaq),
+        useHistory().nasdaqFiveDaysUpdate(newNasdaq),
+        useHistory().nasdaqSixDaysUpdate(newNasdaq),
+      ]);
+
+      await Promise.all([
+        useHistory().seoulOneWeekUpdate(newSeoul),
+        useHistory().seoulTwoWeekUpdate(newSeoul),
+        useHistory().seoulThreeWeekUpdate(newSeoul),
+        useHistory().seoulFourWeekUpdate(newSeoul),
+      ]);
+
+      await Promise.all([
+        useHistory().kosdaqOneWeekUpdate(newKosdaq),
+        useHistory().kosdaqTwoWeekUpdate(newKosdaq),
+        useHistory().kosdaqThreeWeekUpdate(newKosdaq),
+        useHistory().kosdaqFourWeekUpdate(newKosdaq),
+      ]);
+
+      await Promise.all([
+        useHistory().nasdaqOneWeekUpdate(newNasdaq),
+        useHistory().nasdaqTwoWeekUpdate(newNasdaq),
+        useHistory().nasdaqThreeWeekUpdate(newNasdaq),
+        useHistory().nasdaqFourWeekUpdate(newNasdaq),
+      ]);
+
+      await Promise.all([
+        useHistory().kosdaqOneYearUpdate(newKosdaq),
+        useHistory().seoulOneYearUpdate(newSeoul),
+        useHistory().nasdaqOneYearUpdate(newNasdaq),
       ]);
     }
   } catch (error) {
