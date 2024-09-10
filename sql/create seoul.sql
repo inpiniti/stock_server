@@ -1,4 +1,4 @@
-CREATE TABLE public.nasdaq (
+CREATE TABLE public.seoul (
     "name" text NOT NULL,
     description text NULL,
     logoid text NULL,
@@ -120,28 +120,28 @@ CREATE TABLE public.nasdaq (
     change_8m numeric NULL,
     change_9m numeric NULL,
     created_at timestamp NOT NULL DEFAULT now(),
-    CONSTRAINT nasdaq_pkey PRIMARY KEY (name, volume, created_at)
+    CONSTRAINT seoul_pkey PRIMARY KEY (name, volume, created_at)
 );
 
-CREATE INDEX nasdaq_change_10m_idx ON public.nasdaq USING btree (change_10m);
-CREATE INDEX nasdaq_change_11m_idx ON public.nasdaq USING btree (change_11m);
-CREATE INDEX nasdaq_change_1d_idx ON public.nasdaq USING btree (change_1d);
-CREATE INDEX nasdaq_change_1h_idx ON public.nasdaq USING btree (change_1h);
-CREATE INDEX nasdaq_change_1m_idx ON public.nasdaq USING btree (change_1m);
-CREATE INDEX nasdaq_change_1w_idx ON public.nasdaq USING btree (change_1w);
-CREATE INDEX nasdaq_change_2d_idx ON public.nasdaq USING btree (change_2d);
-CREATE INDEX nasdaq_change_2m_idx ON public.nasdaq USING btree (change_2m);
-CREATE INDEX nasdaq_change_2w_idx ON public.nasdaq USING btree (change_2w);
-CREATE INDEX nasdaq_change_3d_idx ON public.nasdaq USING btree (change_3d);
-CREATE INDEX nasdaq_change_3m_idx ON public.nasdaq USING btree (change_3m);
-CREATE INDEX nasdaq_change_3w_idx ON public.nasdaq USING btree (change_3w);
-CREATE INDEX nasdaq_change_4d_idx ON public.nasdaq USING btree (change_4d);
-CREATE INDEX nasdaq_change_4m_idx ON public.nasdaq USING btree (change_4m);
-CREATE INDEX nasdaq_change_4w_idx ON public.nasdaq USING btree (change_4w);
-CREATE INDEX nasdaq_change_5d_idx ON public.nasdaq USING btree (change_5d);
-CREATE INDEX nasdaq_change_5m_idx ON public.nasdaq USING btree (change_5m);
-CREATE INDEX nasdaq_change_6d_idx ON public.nasdaq USING btree (change_6d);
-CREATE INDEX nasdaq_change_6m_idx ON public.nasdaq USING btree (change_6m);
-CREATE INDEX nasdaq_change_7m_idx ON public.nasdaq USING btree (change_7m);
-CREATE INDEX nasdaq_change_8m_idx ON public.nasdaq USING btree (change_8m);
-CREATE INDEX nasdaq_change_9m_idx ON public.nasdaq USING btree (change_9m);
+CREATE INDEX seoul_change_10m_idx ON public.seoul USING btree (change_10m);
+CREATE INDEX seoul_change_11m_idx ON public.seoul USING btree (change_11m);
+CREATE INDEX seoul_change_1d_idx ON public.seoul USING btree (change_1d);
+CREATE INDEX seoul_change_1h_idx ON public.seoul USING btree (change_1h);
+CREATE INDEX seoul_change_1m_idx ON public.seoul USING btree (change_1m);
+CREATE INDEX seoul_change_1w_idx ON public.seoul USING btree (change_1w);
+CREATE INDEX seoul_change_2d_idx ON public.seoul USING btree (change_2d);
+CREATE INDEX seoul_change_2m_idx ON public.seoul USING btree (change_2m);
+CREATE INDEX seoul_change_2w_idx ON public.seoul USING btree (change_2w);
+CREATE INDEX seoul_change_3d_idx ON public.seoul USING btree (change_3d);
+CREATE INDEX seoul_change_3m_idx ON public.seoul USING btree (change_3m);
+CREATE INDEX seoul_change_3w_idx ON public.seoul USING btree (change_3w);
+CREATE INDEX seoul_change_4d_idx ON public.seoul USING btree (change_4d);
+CREATE INDEX seoul_change_4m_idx ON public.seoul USING btree (change_4m);
+CREATE INDEX seoul_change_4w_idx ON public.seoul USING btree (change_4w);
+CREATE INDEX seoul_change_5d_idx ON public.seoul USING btree (change_5d);
+CREATE INDEX seoul_change_5m_idx ON public.seoul USING btree (change_5m);
+CREATE INDEX seoul_change_6d_idx ON public.seoul USING btree (change_6d);
+CREATE INDEX seoul_change_6m_idx ON public.seoul USING btree (change_6m);
+CREATE INDEX seoul_change_7m_idx ON public.seoul USING btree (change_7m);
+CREATE INDEX seoul_change_8m_idx ON public.seoul USING btree (change_8m);
+CREATE INDEX seoul_change_9m_idx ON public.seoul USING btree (change_9m);
