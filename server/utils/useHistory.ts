@@ -44,6 +44,7 @@ const selectByTimeFrame = async (
   const sqlStr = `SELECT name, close, created_at
                   FROM ${tableName}
                   WHERE DATE_TRUNC('${timeFrame}', ${tableName}.created_at) = DATE_TRUNC('${timeFrame}', NOW()${dateOffset})`;
+  console.log("selectByTimeFrame", sqlStr);
   return await useGalaxy().execute(sql.raw(sqlStr));
 };
 
@@ -55,7 +56,12 @@ const updateByTimeFrame = async (
   daysAgo: number = 1 // 기본값을 1로 설정
 ) => {
   try {
+    console.log("updateByTimeFrame", tableName, timeFrame, daysAgo);
     const prevList = await selectByTimeFrame(tableName, timeFrame, daysAgo);
+    console.log(
+      `${daysAgo} ${timeFrame} 전 ${tableName} 데이터의 length`,
+      prevList.length
+    );
     await useGalaxy().transaction(async (trx: any) => {
       for (const currentItem of currentList) {
         const prevItem = prevList.find(
