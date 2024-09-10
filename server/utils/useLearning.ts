@@ -112,14 +112,20 @@ export const useLearning = () => {
       const weightsJson = JSON.stringify(Array.from(serializedWeights));
 
       // 불러오기 후 있으면 업데이트
-      const data = await load(sotckType, ago);
+      const _data = await load(sotckType, ago);
 
-      console.log("data.length", data.length);
-      console.log("data.length == 0", data.length == 0);
+      console.log("sotckType", sotckType);
+      console.log("ago", ago);
+      console.log("_data.length", _data.length);
+      console.log("_data.length == 0", _data.length == 0);
       console.log("modelJson", modelJson.slice(0, 100) + "...");
       console.log("weightsJson", weightsJson.slice(0, 100) + "...");
       // 없으면 새로 생성
-      if (data == undefined || data.length == undefined || data.length == 0) {
+      if (
+        _data == undefined ||
+        _data.length == undefined ||
+        _data.length == 0
+      ) {
         const { data, error } = await useSupabase()
           .from("ai_models")
           .insert({
@@ -169,17 +175,20 @@ export const useLearning = () => {
   // 모델 불러오기
   const load = async (sotckType: string, ago: AgoType) => {
     try {
-      const data = await useSupabase()
-        .from("ai_models")
-        .select("*")
-        .eq("market_sector", sotckType)
-        .eq("ago", ago);
+      const data = (
+        await useSupabase()
+          .from("ai_models")
+          .select("*")
+          .eq("market_sector", sotckType)
+          .eq("ago", ago)
+      ).data;
       // const data = await useGalaxy()
       //   .select()
       //   .from(pgAiModel)
       //   .where(
       //     and(eq(pgAiModel.market_sector, sotckType), eq(pgAiModel.ago, ago))
       //   );
+      console.log("load()");
       return data;
     } catch (error) {
       console.error("error007", error);
