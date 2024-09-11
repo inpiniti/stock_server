@@ -130,9 +130,11 @@ const getData = ({
     -H 'sec-fetch-mode: cors' \
     -H 'sec-fetch-site: same-site' \
     -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36' \
-    -H 'x-requested-with: investing-client/11876f1' \
+    -H 'x-requested-with: investing-client/c2d51a2' \
     --data-raw '${body}'
   `;
+
+    console.log("curlCommand", curlCommand);
 
     return new Promise((resolve, reject) => {
       exec(curlCommand, (error, stdout, stderr) => {
@@ -147,6 +149,7 @@ const getData = ({
           return;
         }
         try {
+          console.error(`stdout: |||||${stdout}|||||`);
           const jsonResponse = JSON.parse(stdout);
           resolve(jsonResponse);
         } catch (parseError) {
