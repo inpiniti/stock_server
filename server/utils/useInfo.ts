@@ -1,9 +1,8 @@
-import { eq, and, sql } from "drizzle-orm";
 import { getLoopData } from "../api/investing/code";
 
 export const useInfo = () => {
   const truncate = async () => {
-    await useGalaxy().execute(sql.raw(`TRUNCATE TABLE stock_info`));
+    await useSupabase().from("stock_info").delete();
   };
   const insert = async (country: string, market: string) => {
     try {
@@ -15,7 +14,7 @@ export const useInfo = () => {
       if (data.length == 0) return false;
 
       await processDataInsert(data, async (chunk: any[]) => {
-        await useGalaxy().insert(pgTableStockInfo).values(chunk);
+        await useSupabase().from("stock_info").insert(chunk);
       });
 
       return true;
@@ -26,15 +25,13 @@ export const useInfo = () => {
   };
   const select = async (country: string, market: string) => {
     try {
-      const data = await useGalaxy()
-        .select()
-        .from(pgTableStockInfo)
-        .where(
-          and(
-            eq(pgTableStockInfo.country, country),
-            eq(pgTableStockInfo.market, market)
-          )
-        );
+      const data = (
+        await useSupabase()
+          .from("stock_info")
+          .select("*")
+          .eq("country", country)
+          .eq("market", market)
+      ).data;
 
       return data;
     } catch (error) {
