@@ -214,6 +214,12 @@ export const useLearning = () => {
         console.timeLog(`run ${sotckType} ${ago}`, "전처리");
         const model = await train(features, labels); // 훈련
         console.timeLog(`run ${sotckType} ${ago}`, "훈련");
+
+        // 예측 코드도 만들어줘
+        const prediction = model.predict(features) as any;
+        console.timeLog("prediction", prediction, "예측");
+        // 예측 코드도 만들어줘
+
         await save(model, sotckType, ago); // 모델 저장
         console.timeLog(`run ${sotckType} ${ago}`, "모델 저장");
         console.timeEnd(`run ${sotckType} ${ago}`);
