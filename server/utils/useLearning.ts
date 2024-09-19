@@ -217,7 +217,7 @@ export const useLearning = () => {
 
         // 예측 코드도 만들어줘
         const prediction = model.predict(features) as any;
-        console.timeLog("prediction", prediction, "예측");
+        console.log("prediction", prediction, "예측");
         // 예측 코드도 만들어줘
 
         await save(model, sotckType, ago); // 모델 저장
