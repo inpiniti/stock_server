@@ -33,9 +33,19 @@ function startScheduler() {
   // 데이터 학습
   //scheduler.run(async () => {});
 
-  // 학습 테스트
-  (function 테스트() {
+  // collectionCode
+  // 이건 저녁 5시에 실행해주면 좋을것 같긴한데, 맥에서만 되는거 같아보임
+
+  // 학습 테스트 (저녁 6시에 실행해주면 좋을듯)
+  scheduler
+  .run(async () => {
     console.log("모델 학습");
-    useLearning().runAll();
-  })();
+    try {
+      await useLearning().runAll();
+      console.log("학습 완료");
+    } catch (error) {
+      console.error(error);
+    }
+  })
+  .cron('0 18 * * *', 'Asia/Seoul'); // 서울 시간대 기준 저녁 6시
 }
