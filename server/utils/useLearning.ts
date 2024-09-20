@@ -217,7 +217,10 @@ export const useLearning = () => {
 
         // 예측 코드도 만들어줘
         const prediction = model.predict(features) as any;
-        console.log("prediction", prediction, "예측");
+        // Tensor를 일차원 배열로 변환하여 출력
+        prediction.data().then((data: any) => {
+          console.log("예측값 배열:", data);
+        });
         // 예측 코드도 만들어줘
 
         await save(model, sotckType, ago); // 모델 저장
