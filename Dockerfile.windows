@@ -38,5 +38,3 @@ EXPOSE 3000
 
 # Run the application
 CMD [ "node", "./.output/server/index.mjs" ]
-
-# sudo docker build -t inpiniti/comics:3.3.0 .
