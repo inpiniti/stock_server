@@ -51,8 +51,23 @@ export const useLearning = () => {
         return isNaN(parseFloat(value)) ? 0 : parseFloat(value);
       }) as number[];
 
-      // 5% 보다 큰지 확인 하고 있는 것으로 보임.
-      const label = row[`change_${ago}`] > 0 ? 1 : 0; // 컬럼 이름은 실제 데이터에 맞게 수정
+      // 0% 보다 큰지 확인 하고 있는 것으로 보임.
+      // ago 부분이 거꿀로 되어 있다.
+      // 변수들은 h1, d1, ... d11, ... y1 뭐 이런식인데,
+      // 디비의 필드르은 1h, 1d, ... 11d, ... 1y 이런식으로 되어 있다.
+      // 그래서 ago를 거꿀로 해서 사용해야 한다.
+      // 아래 코드를 수정가능할까?
+
+      function convertAgoFormat(ago: string): string {
+        // ago 변수의 첫 글자와 나머지 부분을 분리
+        const firstChar = ago.charAt(0);
+        const rest = ago.slice(1);
+        // 순서를 바꾸어 데이터베이스 필드 형식에 맞게 조합
+        return `${rest}${firstChar}`;
+      }
+      const dbFieldAgo = convertAgoFormat(ago);
+
+      const label = row[`change_${dbFieldAgo}`] > 0 ? 1 : 0; // 컬럼 이름은 실제 데이터에 맞게 수정
 
       features.push(feature);
       labels.push(label);
@@ -114,12 +129,6 @@ export const useLearning = () => {
       // 불러오기 후 있으면 업데이트
       const _data = await load(sotckType, ago);
 
-      console.log("sotckType", sotckType);
-      console.log("ago", ago);
-      console.log("_data.length", _data.length);
-      console.log("_data.length == 0", _data.length == 0);
-      console.log("modelJson", modelJson.slice(0, 100) + "...");
-      console.log("weightsJson", weightsJson.slice(0, 100) + "...");
       // 없으면 새로 생성
       if (
         _data == undefined ||
@@ -188,7 +197,6 @@ export const useLearning = () => {
       //   .where(
       //     and(eq(pgAiModel.market_sector, sotckType), eq(pgAiModel.ago, ago))
       //   );
-      console.log("load()");
       return data;
     } catch (error) {
       console.error("error007", error);
@@ -214,15 +222,6 @@ export const useLearning = () => {
         console.timeLog(`run ${sotckType} ${ago}`, "전처리");
         const model = await train(features, labels); // 훈련
         console.timeLog(`run ${sotckType} ${ago}`, "훈련");
-
-        // 예측 코드도 만들어줘
-        const prediction = model.predict(features) as any;
-        // Tensor를 일차원 배열로 변환하여 출력
-        prediction.data().then((data: any) => {
-          console.log("예측값 배열:", data);
-        });
-        // 예측 코드도 만들어줘
-
         await save(model, sotckType, ago); // 모델 저장
         console.timeLog(`run ${sotckType} ${ago}`, "모델 저장");
         console.timeEnd(`run ${sotckType} ${ago}`);
