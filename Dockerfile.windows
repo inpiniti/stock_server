@@ -38,3 +38,5 @@ EXPOSE 3000
 
 # Run the application
 CMD [ "node", "./.output/server/index.mjs" ]
+
+# docker build -f Dockerfile.windows -t stock.potatomap:1.0.0 .
