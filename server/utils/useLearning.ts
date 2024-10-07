@@ -162,8 +162,6 @@ export const useLearning = () => {
           .eq("market_sector", sotckType)
           .eq("ago", ago)
           .select();
-        console.log("model update data", data.slice(0, 100) + "...");
-        console.log("model update error", error);
         // await useGalaxy()
         //   .update(pgAiModel)
         //   .set({

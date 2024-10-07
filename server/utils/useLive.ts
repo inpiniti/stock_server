@@ -18,10 +18,10 @@ export const useLive = () => {
     }
   };
   const seoulInsert = async (data: any) => {
-    await useSupabase().from("seoul_live").delete();
-    //await useGalaxy().execute(sql.raw(`TRUNCATE TABLE seoul_live`));
-
     try {
+      await useSupabase().from("seoul_live").delete();
+      //await useGalaxy().execute(sql.raw(`TRUNCATE TABLE seoul_live`));
+
       await useSupabase().from("seoul_live").insert(data);
       // await processDataInsert(data, async (chunk: any[]) => {
       //   await useGalaxy().insert(pgTableSeoulLive).values(chunk);
@@ -44,9 +44,10 @@ export const useLive = () => {
     }
   };
   const kosdaqInsert = async (data: any) => {
-    await useSupabase().from("kosdaq_live").delete();
-    //await useGalaxy().execute(sql.raw(`TRUNCATE TABLE kosdaq_live`));
     try {
+      await useSupabase().from("kosdaq_live").delete();
+      //await useGalaxy().execute(sql.raw(`TRUNCATE TABLE kosdaq_live`));
+
       await useSupabase().from("kosdaq_live").insert(data);
       // await processDataInsert(data, async (chunk: any[]) => {
       //   await useGalaxy().insert(pgTableKosdaqLive).values(chunk);
@@ -69,9 +70,10 @@ export const useLive = () => {
     }
   };
   const nasdaqInsert = async (data: any) => {
-    await useSupabase().from("nasdaq_live").delete();
-    //await useGalaxy().execute(sql.raw(`TRUNCATE TABLE nasdaq_live`));
     try {
+      await useSupabase().from("nasdaq_live").delete();
+      //await useGalaxy().execute(sql.raw(`TRUNCATE TABLE nasdaq_live`));
+
       await useSupabase().from("nasdaq_live").insert(data);
       // await processDataInsert(data, async (chunk: any[]) => {
       //   await useGalaxy().insert(pgTableNasdaqLive).values(chunk);
