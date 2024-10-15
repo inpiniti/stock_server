@@ -4,7 +4,11 @@ import { eq, and } from "drizzle-orm";
 
 export const useLearning = () => {
   // 전처리
-  const preprocess = (data: any, ago: AgoType) => {
+  const preprocessCommon = (
+    data: any,
+    ago: AgoType,
+    labelCallback: (row: any, dbFieldAgo: string) => number
+  ) => {
     const features: number[][] = []; // 특징
     const labels: number[] = []; // 라벨
 
@@ -67,7 +71,7 @@ export const useLearning = () => {
       }
       const dbFieldAgo = convertAgoFormat(ago);
 
-      const label = row[`change_${dbFieldAgo}`] > 0 ? 1 : 0; // 컬럼 이름은 실제 데이터에 맞게 수정
+      const label = labelCallback(row, dbFieldAgo); // 컬럼 이름은 실제 데이터에 맞게 수정
 
       features.push(feature);
       labels.push(label);
@@ -79,8 +83,22 @@ export const useLearning = () => {
     };
   };
 
+  const preprocess = (data: any, ago: AgoType) => {
+    return preprocessCommon(data, ago, (row, dbFieldAgo) =>
+      row[`change_${dbFieldAgo}`] > 0 ? 1 : 0
+    );
+  };
+
+  const preprocessWithOriginalLabel = (data: any, ago: AgoType) => {
+    return preprocessCommon(
+      data,
+      ago,
+      (row, dbFieldAgo) => row[`change_${dbFieldAgo}`]
+    );
+  };
+
   // 훈련
-  const train = async (features: any, labels: any) => {
+  const trainBinary = async (features: any, labels: any) => {
     const model = tf.sequential();
     model.add(
       tf.layers.dense({
@@ -107,71 +125,103 @@ export const useLearning = () => {
     return model;
   };
 
-  // 모델 저장
-  const save = async (model: any, sotckType: string, ago: AgoType) => {
+  // 훈련2
+  const trainRegression = async (features: any, labels: any) => {
+    const model = tf.sequential();
+    model.add(
+      tf.layers.dense({
+        units: 64,
+        activation: "relu",
+        inputShape: [features.shape[1]],
+      })
+    );
+    model.add(tf.layers.dense({ units: 32, activation: "relu" }));
+    model.add(tf.layers.dense({ units: 1, activation: "linear" }));
+
+    model.compile({
+      optimizer: tf.train.adam(),
+      loss: "meanSquaredError",
+      metrics: ["mae"], // Mean Absolute Error
+    });
+
+    await model.fit(features, labels, {
+      epochs: 50,
+      batchSize: 32,
+      validationSplit: 0.2,
+    });
+
+    return model;
+  };
+
+  // 모델을 JSON 형태로 직렬화하고 가중치를 직렬화하는 함수
+  const serializeModel = async (model: any) => {
+    if (model instanceof tf.LayersModel) {
+      console.log("model is an instance of tf.Model");
+    } else {
+      console.error("model is not an instance of tf.Model");
+      throw new Error("Invalid model instance");
+    }
+
+    const modelJson = await model.toJSON();
+    const modelWeights = await model.getWeights();
+    const serializedWeights = modelWeights.map((weight: any) =>
+      weight.dataSync()
+    );
+    const weightsJson = JSON.stringify(Array.from(serializedWeights));
+
+    return { modelJson, weightsJson };
+  };
+
+  // 모델을 Supabase에 저장하는 함수
+  const saveModelToSupabase = async (
+    modelJson: any,
+    weightsJson: any,
+    sotckType: string,
+    ago: AgoType,
+    tableName: string
+  ) => {
+    const { data, error } = await useSupabase()
+      .from(tableName)
+      .upsert(
+        {
+          model: modelJson,
+          weights: weightsJson,
+          market_sector: sotckType,
+          ago: ago,
+        },
+        { onConflict: ["market_sector", "ago"] }
+      )
+      .select();
+
+    console.log(
+      `model upsert data in ${tableName}`,
+      data.slice(0, 100) + "..."
+    );
+    console.log(`model upsert error in ${tableName}`, error);
+
+    if (error) {
+      throw new Error(
+        `Error upserting model to ${tableName}: ${error.message}`
+      );
+    }
+  };
+
+  // 모델 저장 함수
+  const save = async (
+    model: any,
+    sotckType: string,
+    ago: AgoType,
+    tableName: string
+  ) => {
     try {
-      if (model instanceof tf.LayersModel) {
-        // model.save()를 여기서 안전하게 호출할 수 있습니다.
-        console.log("model is an instance of tf.Model");
-      } else {
-        console.error("model is not an instance of tf.Model");
-      }
-
-      // 모델을 JSON 형태로 직렬화
-      const modelJson = await model.toJSON();
-      const modelWeights = await model.getWeights(); // 가중치를 가져옵니다.
-      const serializedWeights = modelWeights.map((weight: any) =>
-        weight.dataSync()
-      ); // 가중치를 직렬화합니다.
-
-      const weightsJson = JSON.stringify(Array.from(serializedWeights));
-
-      // 불러오기 후 있으면 업데이트
-      const _data = await load(sotckType, ago);
-
-      // 없으면 새로 생성
-      if (
-        _data == undefined ||
-        _data.length == undefined ||
-        _data.length == 0
-      ) {
-        const { data, error } = await useSupabase()
-          .from("ai_models")
-          .insert({
-            model: modelJson,
-            weights: weightsJson,
-            market_sector: sotckType,
-            ago: ago,
-          })
-          .select();
-        console.log("model insert data", data.slice(0, 100) + "...");
-        console.log("model insert error", error);
-        // await useGalaxy().insert(pgAiModel).values({
-        //   model: modelJson,
-        //   weights: weightsJson,
-        //   market_sector: sotckType,
-        //   ago: ago,
-        // });
-      } else {
-        const { data, error } = await useSupabase()
-          .from("ai_models")
-          .update({
-            model: modelJson,
-            weights: weightsJson,
-          })
-          .eq("market_sector", sotckType)
-          .eq("ago", ago)
-          .select();
-        // await useGalaxy()
-        //   .update(pgAiModel)
-        //   .set({
-        //     model: modelJson,
-        //     weights: weightsJson,
-        //   })
-        //   .where(
-        //     and(eq(pgAiModel.market_sector, sotckType), eq(pgAiModel.ago, ago))
-        //   );
-      }
+      const { modelJson, weightsJson } = await serializeModel(model);
+      await saveModelToSupabase(
+        modelJson,
+        weightsJson,
+        sotckType,
+        ago,
+        tableName
+      );
       return true;
     } catch (error) {
       console.error("error006", error);
@@ -179,31 +229,25 @@ export const useLearning = () => {
     }
   };
 
-  // 모델 불러오기
-  const load = async (sotckType: string, ago: AgoType) => {
-    try {
-      const data = (
-        await useSupabase()
-          .from("ai_models")
-          .select("*")
-          .eq("market_sector", sotckType)
-          .eq("ago", ago)
-      ).data;
-      // const data = await useGalaxy()
-      //   .select()
-      //   .from(pgAiModel)
-      //   .where(
-      //     and(eq(pgAiModel.market_sector, sotckType), eq(pgAiModel.ago, ago))
-      //   );
-      return data;
-    } catch (error) {
-      console.error("error007", error);
-      throw error;
-    }
+  // 예제 사용
+  const saveBinaryModel = async (
+    model: any,
+    sotckType: string,
+    ago: AgoType
+  ) => {
+    return save(model, sotckType, ago, "ai_models");
+  };
+
+  const saveRegressionModel = async (
+    model: any,
+    sotckType: string,
+    ago: AgoType
+  ) => {
+    return save(model, sotckType, ago, "ai_models_price");
   };
 
   // ai 학습 후 저장까지
-  const run = async (sotckType: string, ago: AgoType) => {
+  const runBinary = async (sotckType: string, ago: AgoType) => {
     console.time(`run ${sotckType} ${ago}`);
     try {
       console.timeLog(`run ${sotckType} ${ago}`, "시작");
@@ -218,9 +262,41 @@ export const useLearning = () => {
       } else {
         const { features, labels } = preprocess(stcokData, ago); // 전처리
         console.timeLog(`run ${sotckType} ${ago}`, "전처리");
-        const model = await train(features, labels); // 훈련
+        const model = await trainBinary(features, labels); // 훈련
         console.timeLog(`run ${sotckType} ${ago}`, "훈련");
-        await save(model, sotckType, ago); // 모델 저장
+        await saveBinaryModel(model, sotckType, ago); // 모델 저장
+        console.timeLog(`run ${sotckType} ${ago}`, "모델 저장");
+        console.timeEnd(`run ${sotckType} ${ago}`);
+        return true;
+      }
+    } catch (error) {
+      console.log("error", error);
+      console.timeEnd(`run ${sotckType} ${ago}`);
+      throw error;
+    }
+  };
+
+  const runRegression = async (sotckType: string, ago: AgoType) => {
+    console.time(`run ${sotckType} ${ago}`);
+    try {
+      console.timeLog(`run ${sotckType} ${ago}`, "시작");
+      const stcokData = await sotckDataOnType[sotckType](ago); // 데이터 가져오기
+      console.timeLog(
+        `run ${sotckType} ${ago}`,
+        `데이터 가져오기 ${stcokData.length}`
+      );
+      if (stcokData.length == 0) {
+        console.timeEnd(`run ${sotckType} ${ago}`);
+        return false;
+      } else {
+        const { features, labels } = preprocessWithOriginalLabel(
+          stcokData,
+          ago
+        ); // 전처리
+        console.timeLog(`run ${sotckType} ${ago}`, "전처리");
+        const model = await trainRegression(features, labels); // 훈련
+        console.timeLog(`run ${sotckType} ${ago}`, "훈련");
+        await saveRegressionModel(model, sotckType, ago); // 모델 저장
         console.timeLog(`run ${sotckType} ${ago}`, "모델 저장");
         console.timeEnd(`run ${sotckType} ${ago}`);
         return true;
@@ -289,7 +365,8 @@ export const useLearning = () => {
     for (const sector of sectors) {
       for (const ago of agos) {
         console.log(`Running for sector: ${sector}, ago: ${ago}`); // Debugging log
-        await run(sector, ago as AgoType);
+        await runBinary(sector, ago as AgoType);
+        await runRegression(sector, ago as AgoType);
       }
     }
   };
