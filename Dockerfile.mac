@@ -2,7 +2,7 @@
 #FROM node:18.17.0
 
 # Use the official Node.js 16 runtime as a parent image
-FROM --platform=linux/amd64 node:16-buster-slim
+FROM --platform=linux/amd64 node:18-buster-slim
 
 # Set the working directory in the container to /app
 WORKDIR /app
