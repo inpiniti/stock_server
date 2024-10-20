@@ -3,6 +3,58 @@ import { pgAiModel } from "./pgAiModels";
 import { eq, and } from "drizzle-orm";
 
 export const useLearning = () => {
+  const sectors = [
+    "all",
+    "seoul",
+    "kosdaq",
+    "nasdaq",
+    "communications",
+    "energyMinerals",
+    "healthTechnology",
+    "nonEnergyMinerals",
+    "utilities",
+    "consumerDurables",
+    "technologyServices",
+    "distributionServices",
+    "finance",
+    "consumerServices",
+    "processIndustries",
+    "producerManufacturing",
+    "commercialServices",
+    "industrialServices",
+    "transportation",
+    "miscellaneous",
+    "consumerNonDurables",
+    "healthServices",
+    "retailTrade",
+    "electronicTechnology",
+  ];
+
+  const agos = [
+    "h1",
+    "d1",
+    "d2",
+    "d3",
+    "d4",
+    "d5",
+    "d6",
+    "w1",
+    "w2",
+    "w3",
+    "w4",
+    "m1",
+    "m2",
+    "m3",
+    "m4",
+    "m5",
+    "m6",
+    "m7",
+    "m8",
+    "m9",
+    "m10",
+    "m11",
+  ];
+
   // 전처리
   const preprocessCommon = (
     data: any,
@@ -90,10 +142,10 @@ export const useLearning = () => {
   };
 
   const preprocessWithOriginalLabel = (data: any, ago: AgoType) => {
-    return preprocessCommon(
-      data,
-      ago,
-      (row, dbFieldAgo) => row[`change_${dbFieldAgo}`]
+    return preprocessCommon(data, ago, (row, dbFieldAgo) =>
+      isNaN(parseFloat(row[`change_${dbFieldAgo}`]))
+        ? 0
+        : parseFloat(row[`change_${dbFieldAgo}`])
     );
   };
 
@@ -180,9 +232,9 @@ export const useLearning = () => {
     ago: AgoType,
     tableName: string
   ) => {
-    const { data, error } = await useSupabase()
-      .from(tableName)
-      .upsert(
+    const { data, error } = await useGalaxy()
+      .upsert(tableName)
+      .values(
         {
           model: modelJson,
           weights: weightsJson,
@@ -190,14 +242,16 @@ export const useLearning = () => {
           ago: ago,
         },
         { onConflict: ["market_sector", "ago"] }
-      )
-      .select();
+      );
 
-    console.log(
-      `model upsert data in ${tableName}`,
-      data.slice(0, 100) + "..."
-    );
-    console.log(`model upsert error in ${tableName}`, error);
+    if (data) {
+      console.log(
+        `model upsert data in ${tableName}`,
+        data.slice(0, 100) + "..."
+      );
+    } else {
+      console.log(`No data returned from upsert in ${tableName}`);
+    }
 
     if (error) {
       throw new Error(
@@ -211,7 +265,7 @@ export const useLearning = () => {
     model: any,
     sotckType: string,
     ago: AgoType,
-    tableName: string
+    tableName: any
   ) => {
     try {
       const { modelJson, weightsJson } = await serializeModel(model);
@@ -235,7 +289,7 @@ export const useLearning = () => {
     sotckType: string,
     ago: AgoType
   ) => {
-    return save(model, sotckType, ago, "ai_models");
+    return save(model, sotckType, ago, pgAiModel);
   };
 
   const saveRegressionModel = async (
@@ -243,7 +297,7 @@ export const useLearning = () => {
     sotckType: string,
     ago: AgoType
   ) => {
-    return save(model, sotckType, ago, "ai_models_price");
+    return save(model, sotckType, ago, pgTableAiModelsPrice);
   };
 
   // ai 학습 후 저장까지
@@ -308,71 +362,28 @@ export const useLearning = () => {
     }
   };
 
-  // 모든 색터, 시간에 대해 학습
-  const runAll = async () => {
-    const sectors = [
-      "all",
-      "seoul",
-      "kosdaq",
-      "nasdaq",
-      "communications",
-      "energyMinerals",
-      "healthTechnology",
-      "nonEnergyMinerals",
-      "utilities",
-      "consumerDurables",
-      "technologyServices",
-      "distributionServices",
-      "finance",
-      "consumerServices",
-      "processIndustries",
-      "producerManufacturing",
-      "commercialServices",
-      "industrialServices",
-      "transportation",
-      "miscellaneous",
-      "consumerNonDurables",
-      "healthServices",
-      "retailTrade",
-      "electronicTechnology",
-    ];
-
-    const agos = [
-      "h1",
-      "d1",
-      "d2",
-      "d3",
-      "d4",
-      "d5",
-      "d6",
-      "w1",
-      "w2",
-      "w3",
-      "w4",
-      "m1",
-      "m2",
-      "m3",
-      "m4",
-      "m5",
-      "m6",
-      "m7",
-      "m8",
-      "m9",
-      "m10",
-      "m11",
-    ];
-
+  const runForAllSectorsAndAgos = async (
+    runFunction: (sector: string, ago: AgoType) => Promise<boolean>
+  ) => {
     for (const sector of sectors) {
       for (const ago of agos) {
         console.log(`Running for sector: ${sector}, ago: ${ago}`); // Debugging log
-        await runBinary(sector, ago as AgoType);
-        await runRegression(sector, ago as AgoType);
+        await runFunction(sector, ago as AgoType);
       }
     }
   };
 
+  const runAllBinary = async () => {
+    await runForAllSectorsAndAgos(runBinary);
+  };
+
+  const runAllRegression = async () => {
+    await runForAllSectorsAndAgos(runRegression);
+  };
+
   return {
-    runAll,
+    runAllBinary,
+    runAllRegression,
   };
 };
 
