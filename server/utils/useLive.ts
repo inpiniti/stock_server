@@ -35,8 +35,8 @@ export const useLive = () => {
   };
   const kosdaqSelect = async () => {
     try {
-      const data = await useSupabase().from("kosdaq_live").select();
-      //const data = await useGalaxy().select().from(pgTableKosdaqLive);
+      //const data = await useSupabase().from("kosdaq_live").select();
+      const data = await useGalaxy().select().from(pgTableKosdaqLive);
       return data;
     } catch (error) {
       console.error("error010", error);
