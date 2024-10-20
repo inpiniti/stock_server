@@ -9,8 +9,8 @@ let dataOneHourAgo = {
 export const useLive = () => {
   const seoulSelect = async () => {
     try {
-      const data = await useSupabase().from("seoul_live").select();
-      //const data = await useGalaxy().select().from(pgTableSeoulLive);
+      //const data = await useSupabase().from("seoul_live").select();
+      const data = await useGalaxy().select().from(pgTableSeoulLive);
       return data;
     } catch (error) {
       console.error("error008", error);
@@ -19,13 +19,13 @@ export const useLive = () => {
   };
   const seoulInsert = async (data: any) => {
     try {
-      await useSupabase().from("seoul_live").delete();
-      //await useGalaxy().execute(sql.raw(`TRUNCATE TABLE seoul_live`));
+      //await useSupabase().from("seoul_live").delete();
+      await useGalaxy().execute(sql.raw(`TRUNCATE TABLE seoul_live`));
 
-      await useSupabase().from("seoul_live").insert(data);
-      // await processDataInsert(data, async (chunk: any[]) => {
-      //   await useGalaxy().insert(pgTableSeoulLive).values(chunk);
-      // });
+      //await useSupabase().from("seoul_live").insert(data);
+      await processDataInsert(data, async (chunk: any[]) => {
+        await useGalaxy().insert(pgTableSeoulLive).values(chunk);
+      });
 
       return true;
     } catch (error) {
@@ -45,13 +45,13 @@ export const useLive = () => {
   };
   const kosdaqInsert = async (data: any) => {
     try {
-      await useSupabase().from("kosdaq_live").delete();
-      //await useGalaxy().execute(sql.raw(`TRUNCATE TABLE kosdaq_live`));
+      //await useSupabase().from("kosdaq_live").delete();
+      await useGalaxy().execute(sql.raw(`TRUNCATE TABLE kosdaq_live`));
 
-      await useSupabase().from("kosdaq_live").insert(data);
-      // await processDataInsert(data, async (chunk: any[]) => {
-      //   await useGalaxy().insert(pgTableKosdaqLive).values(chunk);
-      // });
+      //await useSupabase().from("kosdaq_live").insert(data);
+      await processDataInsert(data, async (chunk: any[]) => {
+        await useGalaxy().insert(pgTableKosdaqLive).values(chunk);
+      });
 
       return true;
     } catch (error) {
@@ -61,8 +61,8 @@ export const useLive = () => {
   };
   const nasdaqSelect = async () => {
     try {
-      const data = await useSupabase().from("nasdaq_live").select();
-      //const data = await useGalaxy().select().from(pgTableNasdaqLive);
+      //const data = await useSupabase().from("nasdaq_live").select();
+      const data = await useGalaxy().select().from(pgTableNasdaqLive);
       return data;
     } catch (error) {
       console.error("error012", error);
@@ -71,13 +71,13 @@ export const useLive = () => {
   };
   const nasdaqInsert = async (data: any) => {
     try {
-      await useSupabase().from("nasdaq_live").delete();
-      //await useGalaxy().execute(sql.raw(`TRUNCATE TABLE nasdaq_live`));
+      //await useSupabase().from("nasdaq_live").delete();
+      await useGalaxy().execute(sql.raw(`TRUNCATE TABLE nasdaq_live`));
 
-      await useSupabase().from("nasdaq_live").insert(data);
-      // await processDataInsert(data, async (chunk: any[]) => {
-      //   await useGalaxy().insert(pgTableNasdaqLive).values(chunk);
-      // });
+      //await useSupabase().from("nasdaq_live").insert(data);
+      await processDataInsert(data, async (chunk: any[]) => {
+        await useGalaxy().insert(pgTableNasdaqLive).values(chunk);
+      });
 
       return true;
     } catch (error) {
