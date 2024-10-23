@@ -1,6 +1,5 @@
 import * as tf from "@tensorflow/tfjs-node";
 import { pgAiModel } from "./pgAiModels";
-import { eq, and } from "drizzle-orm";
 
 export const useLearning = () => {
   const sectors = [

@@ -1,5 +1,6 @@
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
+import { eq, and } from "drizzle-orm";
 
 // u0_a116
 
@@ -32,22 +33,22 @@ export const useGalaxy = () => {
           if (dataArray.length == 0) return false;
           try {
             for (const row of dataArray) {
-              const conflictCondition = options.onConflict
-                .map((col) => `${col} = '${row[col]}'`)
-                .join(" AND ");
+              const conflictConditions = options.onConflict.map((col) =>
+                eq(tableName[col], row[col])
+              );
+              const combinedCondition = and(...conflictConditions);
               const existingRow = await db
                 .select()
                 .from(tableName)
-                .where(conflictCondition)
-                .limit(1);
+                .where(combinedCondition);
 
               console.log("existingRow", existingRow);
               console.log("row", row);
-              console.log("conflictCondition", conflictCondition);
+              console.log("conflictCondition", combinedCondition);
 
               if (existingRow.length > 0) {
                 console.log("update");
-                await db.update(tableName).set(row).where(conflictCondition);
+                await db.update(tableName).set(row).where(combinedCondition);
               } else {
                 console.log("insert");
                 await db.insert(tableName).values(row);

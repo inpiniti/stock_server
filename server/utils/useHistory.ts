@@ -96,9 +96,9 @@ const updateByTimeFrame = async (
         if (timeFrame === "hour") {
           changeColumn = "change_1h";
         } else if (timeFrame === "day") {
-          changeColumn = daysAgo === 1 ? "change_1d" : `change_${daysAgo}d`;
+          changeColumn = `change_${daysAgo}d`;
         } else if (timeFrame === "week") {
-          changeColumn = "change_1w";
+          changeColumn = `change_${daysAgo}w`;
         } else if (timeFrame === "year") {
           changeColumn = "change_1y";
         }
@@ -200,6 +200,76 @@ export const useHistory = () => {
   const nasdaqFourWeekUpdate = async (currentNasdaqList: any[]) =>
     await updateByTimeFrame("nasdaq", "week", currentNasdaqList, 4);
 
+  // month
+  const seoulOneMonthUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "month", currentSeoulList);
+  const seoulTwoMonthUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "month", currentSeoulList, 2);
+  const seoulThreeMonthUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "month", currentSeoulList, 3);
+  const seoulFourMonthUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "month", currentSeoulList, 4);
+  const seoulFiveMonthUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "month", currentSeoulList, 5);
+  const seoulSixMonthUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "month", currentSeoulList, 6);
+  const seoulSevenMonthUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "month", currentSeoulList, 7);
+  const seoulEightMonthUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "month", currentSeoulList, 8);
+  const seoulNineMonthUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "month", currentSeoulList, 9);
+  const seoulTenMonthUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "month", currentSeoulList, 10);
+  const seoulElevenMonthUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "month", currentSeoulList, 11);
+
+  const kosdaqOneMonthUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "month", currentKosdaqList);
+  const kosdaqTwoMonthUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "month", currentKosdaqList, 2);
+  const kosdaqThreeMonthUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "month", currentKosdaqList, 3);
+  const kosdaqFourMonthUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "month", currentKosdaqList, 4);
+  const kosdaqFiveMonthUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "month", currentKosdaqList, 5);
+  const kosdaqSixMonthUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "month", currentKosdaqList, 6);
+  const kosdaqSevenMonthUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "month", currentKosdaqList, 7);
+  const kosdaqEightMonthUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "month", currentKosdaqList, 8);
+  const kosdaqNineMonthUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "month", currentKosdaqList, 9);
+  const kosdaqTenMonthUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "month", currentKosdaqList, 10);
+  const kosdaqElevenMonthUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "month", currentKosdaqList, 11);
+
+  const nasdaqOneMonthUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "month", currentNasdaqList);
+  const nasdaqTwoMonthUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "month", currentNasdaqList, 2);
+  const nasdaqThreeMonthUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "month", currentNasdaqList, 3);
+  const nasdaqFourMonthUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "month", currentNasdaqList, 4);
+  const nasdaqFiveMonthUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "month", currentNasdaqList, 5);
+  const nasdaqSixMonthUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "month", currentNasdaqList, 6);
+  const nasdaqSevenMonthUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "month", currentNasdaqList, 7);
+  const nasdaqEightMonthUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "month", currentNasdaqList, 8);
+  const nasdaqNineMonthUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "month", currentNasdaqList, 9);
+  const nasdaqTenMonthUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "month", currentNasdaqList, 10);
+  const nasdaqElevenMonthUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "month", currentNasdaqList, 11);
+
   const kosdaqOneYearUpdate = async (currentKosdaqList: any[]) =>
     await updateByTimeFrame("kosdaq", "year", currentKosdaqList);
   const seoulOneYearUpdate = async (currentSeoulList: any[]) =>
@@ -250,6 +320,42 @@ export const useHistory = () => {
     nasdaqTwoWeekUpdate,
     nasdaqThreeWeekUpdate,
     nasdaqFourWeekUpdate,
+
+    seoulOneMonthUpdate,
+    seoulTwoMonthUpdate,
+    seoulThreeMonthUpdate,
+    seoulFourMonthUpdate,
+    seoulFiveMonthUpdate,
+    seoulSixMonthUpdate,
+    seoulSevenMonthUpdate,
+    seoulEightMonthUpdate,
+    seoulNineMonthUpdate,
+    seoulTenMonthUpdate,
+    seoulElevenMonthUpdate,
+
+    kosdaqOneMonthUpdate,
+    kosdaqTwoMonthUpdate,
+    kosdaqThreeMonthUpdate,
+    kosdaqFourMonthUpdate,
+    kosdaqFiveMonthUpdate,
+    kosdaqSixMonthUpdate,
+    kosdaqSevenMonthUpdate,
+    kosdaqEightMonthUpdate,
+    kosdaqNineMonthUpdate,
+    kosdaqTenMonthUpdate,
+    kosdaqElevenMonthUpdate,
+
+    nasdaqOneMonthUpdate,
+    nasdaqTwoMonthUpdate,
+    nasdaqThreeMonthUpdate,
+    nasdaqFourMonthUpdate,
+    nasdaqFiveMonthUpdate,
+    nasdaqSixMonthUpdate,
+    nasdaqSevenMonthUpdate,
+    nasdaqEightMonthUpdate,
+    nasdaqNineMonthUpdate,
+    nasdaqTenMonthUpdate,
+    nasdaqElevenMonthUpdate,
 
     kosdaqOneYearUpdate,
     seoulOneYearUpdate,

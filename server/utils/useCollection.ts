@@ -88,6 +88,48 @@ export const useCollection = async () => {
       ]);
 
       await Promise.all([
+        useHistory().seoulOneMonthUpdate(newSeoul),
+        useHistory().seoulTwoMonthUpdate(newSeoul),
+        useHistory().seoulThreeMonthUpdate(newSeoul),
+        useHistory().seoulFourMonthUpdate(newSeoul),
+        useHistory().seoulFiveMonthUpdate(newSeoul),
+        useHistory().seoulSixMonthUpdate(newSeoul),
+        useHistory().seoulSevenMonthUpdate(newSeoul),
+        useHistory().seoulEightMonthUpdate(newSeoul),
+        useHistory().seoulNineMonthUpdate(newSeoul),
+        useHistory().seoulTenMonthUpdate(newSeoul),
+        useHistory().seoulElevenMonthUpdate(newSeoul),
+      ]);
+
+      await Promise.all([
+        useHistory().kosdaqOneMonthUpdate(newKosdaq),
+        useHistory().kosdaqTwoMonthUpdate(newKosdaq),
+        useHistory().kosdaqThreeMonthUpdate(newKosdaq),
+        useHistory().kosdaqFourMonthUpdate(newKosdaq),
+        useHistory().kosdaqFiveMonthUpdate(newKosdaq),
+        useHistory().kosdaqSixMonthUpdate(newKosdaq),
+        useHistory().kosdaqSevenMonthUpdate(newKosdaq),
+        useHistory().kosdaqEightMonthUpdate(newKosdaq),
+        useHistory().kosdaqNineMonthUpdate(newKosdaq),
+        useHistory().kosdaqTenMonthUpdate(newKosdaq),
+        useHistory().kosdaqElevenMonthUpdate(newKosdaq),
+      ]);
+
+      await Promise.all([
+        useHistory().nasdaqOneMonthUpdate(newNasdaq),
+        useHistory().nasdaqTwoMonthUpdate(newNasdaq),
+        useHistory().nasdaqThreeMonthUpdate(newNasdaq),
+        useHistory().nasdaqFourMonthUpdate(newNasdaq),
+        useHistory().nasdaqFiveMonthUpdate(newNasdaq),
+        useHistory().nasdaqSixMonthUpdate(newNasdaq),
+        useHistory().nasdaqSevenMonthUpdate(newNasdaq),
+        useHistory().nasdaqEightMonthUpdate(newNasdaq),
+        useHistory().nasdaqNineMonthUpdate(newNasdaq),
+        useHistory().nasdaqTenMonthUpdate(newNasdaq),
+        useHistory().nasdaqElevenMonthUpdate(newNasdaq),
+      ]);
+
+      await Promise.all([
         useHistory().kosdaqOneYearUpdate(newKosdaq),
         useHistory().seoulOneYearUpdate(newSeoul),
         useHistory().nasdaqOneYearUpdate(newNasdaq),

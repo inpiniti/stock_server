@@ -48,4 +48,16 @@ function startScheduler() {
       }
     })
     .cron("0 18 * * *", "Asia/Seoul"); // 서울 시간대 기준 저녁 6시
+
+  scheduler
+    .run(async () => {
+      console.log("모델 학습");
+      try {
+        await useLearning().runAllRegression();
+        console.log("학습 완료");
+      } catch (error) {
+        console.error(error);
+      }
+    })
+    .cron("0 4 * * *", "Asia/Seoul"); // 서울 시간대 기준 새벽 4시
 }
