@@ -126,19 +126,148 @@ export const useHistory = () => {
 
   const seoulOneHourUpdate = async (currentSeoulList: any[]) =>
     await updateByTimeFrame("seoul", "hour", currentSeoulList);
-  const seoulOneDayUpdate = async (currentSeoulList: any[]) =>
-    await updateByTimeFrame("seoul", "day", currentSeoulList);
+  const seoulTwoHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 2);
+  const seoulThreeHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 3);
+  const seoulFourHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 4);
+  const seoulFiveHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 5);
+  const seoulSixHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 6);
+  const seoulSevenHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 7);
+  const seoulEightHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 8);
+  const seoulNineHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 9);
+  const seoulTenHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 10);
+  const seoulElevenHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 11);
+  const seoulTwelveHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 12);
+  const seoulThirteenHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 13);
+  const seoulFourteenHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 14);
+  const seoulFifteenHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 15);
+  const seoulSixteenHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 16);
+  const seoulSeventeenHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 17);
+  const seoulEighteenHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 18);
+  const seoulNineteenHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 19);
+  const seoulTwentyHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 20);
+  const seoulTwentyOneHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 21);
+  const seoulTwentyTwoHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 22);
+  const seoulTwentyThreeHourUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "hour", currentSeoulList, 23);
+
   const kosdaqOneHourUpdate = async (currentKosdaqList: any[]) =>
     await updateByTimeFrame("kosdaq", "hour", currentKosdaqList);
+  const kosdaqTwoHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 2);
+  const kosdaqThreeHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 3);
+  const kosdaqFourHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 4);
+  const kosdaqFiveHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 5);
+  const kosdaqSixHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 6);
+  const kosdaqSevenHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 7);
+  const kosdaqEightHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 8);
+  const kosdaqNineHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 9);
+  const kosdaqTenHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 10);
+  const kosdaqElevenHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 11);
+  const kosdaqTwelveHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 12);
+  const kosdaqThirteenHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 13);
+  const kosdaqFourteenHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 14);
+  const kosdaqFifteenHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 15);
+  const kosdaqSixteenHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 16);
+  const kosdaqSeventeenHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 17);
+  const kosdaqEighteenHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 18);
+  const kosdaqNineteenHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 19);
+  const kosdaqTwentyHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 20);
+  const kosdaqTwentyOneHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 21);
+  const kosdaqTwentyTwoHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 22);
+  const kosdaqTwentyThreeHourUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "hour", currentKosdaqList, 23);
 
-  const kosdaqOneDayUpdate = async (currentKosdaqList: any[]) =>
-    await updateByTimeFrame("kosdaq", "day", currentKosdaqList);
   const nasdaqOneHourUpdate = async (currentNasdaqList: any[]) =>
     await updateByTimeFrame("nasdaq", "hour", currentNasdaqList);
-  const nasdaqOneDayUpdate = async (currentNasdaqList: any[]) =>
-    await updateByTimeFrame("nasdaq", "day", currentNasdaqList);
+  const nasdaqTwoHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 2);
+  const nasdaqThreeHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 3);
+  const nasdaqFourHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 4);
+  const nasdaqFiveHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 5);
+  const nasdaqSixHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 6);
+  const nasdaqSevenHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 7);
+  const nasdaqEightHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 8);
+  const nasdaqNineHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 9);
+  const nasdaqTenHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 10);
+  const nasdaqElevenHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 11);
+  const nasdaqTwelveHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 12);
+  const nasdaqThirteenHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 13);
+  const nasdaqFourteenHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 14);
+  const nasdaqFifteenHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 15);
+  const nasdaqSixteenHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 16);
+  const nasdaqSeventeenHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 17);
+  const nasdaqEighteenHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 18);
+  const nasdaqNineteenHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 19);
+  const nasdaqTwentyHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 20);
+  const nasdaqTwentyOneHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 21);
+  const nasdaqTwentyTwoHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 22);
+  const nasdaqTwentyThreeHourUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "hour", currentNasdaqList, 23);
 
   // New update functions for 2, 3, 4, 5, 6 days ago
+  const seoulOneDayUpdate = async (currentSeoulList: any[]) =>
+    await updateByTimeFrame("seoul", "day", currentSeoulList);
   const seoulTwoDaysUpdate = async (currentSeoulList: any[]) =>
     await updateByTimeFrame("seoul", "day", currentSeoulList, 2);
   const seoulThreeDaysUpdate = async (currentSeoulList: any[]) =>
@@ -150,6 +279,8 @@ export const useHistory = () => {
   const seoulSixDaysUpdate = async (currentSeoulList: any[]) =>
     await updateByTimeFrame("seoul", "day", currentSeoulList, 6);
 
+  const kosdaqOneDayUpdate = async (currentKosdaqList: any[]) =>
+    await updateByTimeFrame("kosdaq", "day", currentKosdaqList);
   const kosdaqTwoDaysUpdate = async (currentKosdaqList: any[]) =>
     await updateByTimeFrame("kosdaq", "day", currentKosdaqList, 2);
   const kosdaqThreeDaysUpdate = async (currentKosdaqList: any[]) =>
@@ -161,6 +292,8 @@ export const useHistory = () => {
   const kosdaqSixDaysUpdate = async (currentKosdaqList: any[]) =>
     await updateByTimeFrame("kosdaq", "day", currentKosdaqList, 6);
 
+  const nasdaqOneDayUpdate = async (currentNasdaqList: any[]) =>
+    await updateByTimeFrame("nasdaq", "day", currentNasdaqList);
   const nasdaqTwoDaysUpdate = async (currentNasdaqList: any[]) =>
     await updateByTimeFrame("nasdaq", "day", currentNasdaqList, 2);
   const nasdaqThreeDaysUpdate = async (currentNasdaqList: any[]) =>
@@ -281,25 +414,94 @@ export const useHistory = () => {
     seoulInsert,
     kosdaqInsert,
     nasdaqInsert,
-    seoulOneHourUpdate,
-    seoulOneDayUpdate,
-    kosdaqOneHourUpdate,
-    kosdaqOneDayUpdate,
-    nasdaqOneHourUpdate,
-    nasdaqOneDayUpdate,
 
+    seoulOneHourUpdate,
+    seoulTwoHourUpdate,
+    seoulThreeHourUpdate,
+    seoulFourHourUpdate,
+    seoulFiveHourUpdate,
+    seoulSixHourUpdate,
+    seoulSevenHourUpdate,
+    seoulEightHourUpdate,
+    seoulNineHourUpdate,
+    seoulTenHourUpdate,
+    seoulElevenHourUpdate,
+    seoulTwelveHourUpdate,
+    seoulThirteenHourUpdate,
+    seoulFourteenHourUpdate,
+    seoulFifteenHourUpdate,
+    seoulSixteenHourUpdate,
+    seoulSeventeenHourUpdate,
+    seoulEighteenHourUpdate,
+    seoulNineteenHourUpdate,
+    seoulTwentyHourUpdate,
+    seoulTwentyOneHourUpdate,
+    seoulTwentyTwoHourUpdate,
+    seoulTwentyThreeHourUpdate,
+
+    kosdaqOneHourUpdate,
+    kosdaqTwoHourUpdate,
+    kosdaqThreeHourUpdate,
+    kosdaqFourHourUpdate,
+    kosdaqFiveHourUpdate,
+    kosdaqSixHourUpdate,
+    kosdaqSevenHourUpdate,
+    kosdaqEightHourUpdate,
+    kosdaqNineHourUpdate,
+    kosdaqTenHourUpdate,
+    kosdaqElevenHourUpdate,
+    kosdaqTwelveHourUpdate,
+    kosdaqThirteenHourUpdate,
+    kosdaqFourteenHourUpdate,
+    kosdaqFifteenHourUpdate,
+    kosdaqSixteenHourUpdate,
+    kosdaqSeventeenHourUpdate,
+    kosdaqEighteenHourUpdate,
+    kosdaqNineteenHourUpdate,
+    kosdaqTwentyHourUpdate,
+    kosdaqTwentyOneHourUpdate,
+    kosdaqTwentyTwoHourUpdate,
+    kosdaqTwentyThreeHourUpdate,
+
+    nasdaqOneHourUpdate,
+    nasdaqTwoHourUpdate,
+    nasdaqThreeHourUpdate,
+    nasdaqFourHourUpdate,
+    nasdaqFiveHourUpdate,
+    nasdaqSixHourUpdate,
+    nasdaqSevenHourUpdate,
+    nasdaqEightHourUpdate,
+    nasdaqNineHourUpdate,
+    nasdaqTenHourUpdate,
+    nasdaqElevenHourUpdate,
+    nasdaqTwelveHourUpdate,
+    nasdaqThirteenHourUpdate,
+    nasdaqFourteenHourUpdate,
+    nasdaqFifteenHourUpdate,
+    nasdaqSixteenHourUpdate,
+    nasdaqSeventeenHourUpdate,
+    nasdaqEighteenHourUpdate,
+    nasdaqNineteenHourUpdate,
+    nasdaqTwentyHourUpdate,
+    nasdaqTwentyOneHourUpdate,
+    nasdaqTwentyTwoHourUpdate,
+    nasdaqTwentyThreeHourUpdate,
+
+    seoulOneDayUpdate,
     seoulTwoDaysUpdate,
     seoulThreeDaysUpdate,
     seoulFourDaysUpdate,
     seoulFiveDaysUpdate,
     seoulSixDaysUpdate,
 
+    kosdaqOneDayUpdate,
     kosdaqTwoDaysUpdate,
     kosdaqThreeDaysUpdate,
     kosdaqFourDaysUpdate,
     kosdaqFiveDaysUpdate,
     kosdaqSixDaysUpdate,
 
+    nasdaqOneDayUpdate,
     nasdaqTwoDaysUpdate,
     nasdaqThreeDaysUpdate,
     nasdaqFourDaysUpdate,

@@ -10,10 +10,6 @@ export const useCollection = async () => {
     const { newSeoul, newKosdaq, originKosdaq, originSeoul } = krResult;
     const { newNasdaq, originNasdaq } = usResult;
 
-    console.log("originSeoul", originSeoul.length);
-    console.log("originKosdaq", originKosdaq.length);
-    console.log("originNasdaq", originNasdaq.length);
-
     await Promise.all([
       useLive().seoulInsert(originSeoul),
       useLive().kosdaqInsert(originKosdaq),
@@ -22,27 +18,101 @@ export const useCollection = async () => {
 
     // 현재시간이 정각인지 확인
     if (new Date().getMinutes() == 0) {
-      console.log("정각 주기 실행");
-
-      console.log("newSeoul", newSeoul.length);
-      console.log("newKosdaq", newKosdaq.length);
-      console.log("newNasdaq", newNasdaq.length);
-
       await Promise.all([
         useHistory().seoulInsert(newSeoul),
         useHistory().kosdaqInsert(newKosdaq),
         useHistory().nasdaqInsert(newNasdaq),
-
-        useHistory().seoulOneHourUpdate(newSeoul),
-        useHistory().kosdaqOneHourUpdate(newKosdaq),
-        useHistory().nasdaqOneHourUpdate(newNasdaq),
-
-        useHistory().seoulOneDayUpdate(newSeoul),
-        useHistory().kosdaqOneDayUpdate(newKosdaq),
-        useHistory().nasdaqOneDayUpdate(newNasdaq),
       ]);
 
       await Promise.all([
+        useHistory().seoulOneHourUpdate(newSeoul),
+        useHistory().seoulTwoHourUpdate(newSeoul),
+        useHistory().seoulThreeHourUpdate(newSeoul),
+        useHistory().seoulFourHourUpdate(newSeoul),
+        useHistory().seoulFiveHourUpdate(newSeoul),
+        useHistory().seoulSixHourUpdate(newSeoul),
+        useHistory().seoulSevenHourUpdate(newSeoul),
+        useHistory().seoulEightHourUpdate(newSeoul),
+        useHistory().seoulNineHourUpdate(newSeoul),
+        useHistory().seoulTenHourUpdate(newSeoul),
+        useHistory().seoulElevenHourUpdate(newSeoul),
+        useHistory().seoulTwelveHourUpdate(newSeoul),
+      ]);
+
+      await Promise.all([
+        useHistory().seoulThirteenHourUpdate(newSeoul),
+        useHistory().seoulFourteenHourUpdate(newSeoul),
+        useHistory().seoulFifteenHourUpdate(newSeoul),
+        useHistory().seoulSixteenHourUpdate(newSeoul),
+        useHistory().seoulSeventeenHourUpdate(newSeoul),
+        useHistory().seoulEighteenHourUpdate(newSeoul),
+        useHistory().seoulNineteenHourUpdate(newSeoul),
+        useHistory().seoulTwentyHourUpdate(newSeoul),
+        useHistory().seoulTwentyOneHourUpdate(newSeoul),
+        useHistory().seoulTwentyTwoHourUpdate(newSeoul),
+        useHistory().seoulTwentyThreeHourUpdate(newSeoul),
+      ]);
+
+      await Promise.all([
+        useHistory().kosdaqOneHourUpdate(newKosdaq),
+        useHistory().kosdaqTwoHourUpdate(newKosdaq),
+        useHistory().kosdaqThreeHourUpdate(newKosdaq),
+        useHistory().kosdaqFourHourUpdate(newKosdaq),
+        useHistory().kosdaqFiveHourUpdate(newKosdaq),
+        useHistory().kosdaqSixHourUpdate(newKosdaq),
+        useHistory().kosdaqSevenHourUpdate(newKosdaq),
+        useHistory().kosdaqEightHourUpdate(newKosdaq),
+        useHistory().kosdaqNineHourUpdate(newKosdaq),
+        useHistory().kosdaqTenHourUpdate(newKosdaq),
+        useHistory().kosdaqElevenHourUpdate(newKosdaq),
+        useHistory().kosdaqTwelveHourUpdate(newKosdaq),
+      ]);
+
+      await Promise.all([
+        useHistory().kosdaqThirteenHourUpdate(newKosdaq),
+        useHistory().kosdaqFourteenHourUpdate(newKosdaq),
+        useHistory().kosdaqFifteenHourUpdate(newKosdaq),
+        useHistory().kosdaqSixteenHourUpdate(newKosdaq),
+        useHistory().kosdaqSeventeenHourUpdate(newKosdaq),
+        useHistory().kosdaqEighteenHourUpdate(newKosdaq),
+        useHistory().kosdaqNineteenHourUpdate(newKosdaq),
+        useHistory().kosdaqTwentyHourUpdate(newKosdaq),
+        useHistory().kosdaqTwentyOneHourUpdate(newKosdaq),
+        useHistory().kosdaqTwentyTwoHourUpdate(newKosdaq),
+        useHistory().kosdaqTwentyThreeHourUpdate(newKosdaq),
+      ]);
+
+      await Promise.all([
+        useHistory().nasdaqOneHourUpdate(newNasdaq),
+        useHistory().nasdaqTwoHourUpdate(newNasdaq),
+        useHistory().nasdaqThreeHourUpdate(newNasdaq),
+        useHistory().nasdaqFourHourUpdate(newNasdaq),
+        useHistory().nasdaqFiveHourUpdate(newNasdaq),
+        useHistory().nasdaqSixHourUpdate(newNasdaq),
+        useHistory().nasdaqSevenHourUpdate(newNasdaq),
+        useHistory().nasdaqEightHourUpdate(newNasdaq),
+        useHistory().nasdaqNineHourUpdate(newNasdaq),
+        useHistory().nasdaqTenHourUpdate(newNasdaq),
+        useHistory().nasdaqElevenHourUpdate(newNasdaq),
+        useHistory().nasdaqTwelveHourUpdate(newNasdaq),
+      ]);
+
+      await Promise.all([
+        useHistory().nasdaqThirteenHourUpdate(newNasdaq),
+        useHistory().nasdaqFourteenHourUpdate(newNasdaq),
+        useHistory().nasdaqFifteenHourUpdate(newNasdaq),
+        useHistory().nasdaqSixteenHourUpdate(newNasdaq),
+        useHistory().nasdaqSeventeenHourUpdate(newNasdaq),
+        useHistory().nasdaqEighteenHourUpdate(newNasdaq),
+        useHistory().nasdaqNineteenHourUpdate(newNasdaq),
+        useHistory().nasdaqTwentyHourUpdate(newNasdaq),
+        useHistory().nasdaqTwentyOneHourUpdate(newNasdaq),
+        useHistory().nasdaqTwentyTwoHourUpdate(newNasdaq),
+        useHistory().nasdaqTwentyThreeHourUpdate(newNasdaq),
+      ]);
+
+      await Promise.all([
+        useHistory().seoulOneDayUpdate(newSeoul),
         useHistory().seoulTwoDaysUpdate(newSeoul),
         useHistory().seoulThreeDaysUpdate(newSeoul),
         useHistory().seoulFourDaysUpdate(newSeoul),
@@ -51,6 +121,7 @@ export const useCollection = async () => {
       ]);
 
       await Promise.all([
+        useHistory().kosdaqOneDayUpdate(newKosdaq),
         useHistory().kosdaqTwoDaysUpdate(newKosdaq),
         useHistory().kosdaqThreeDaysUpdate(newKosdaq),
         useHistory().kosdaqFourDaysUpdate(newKosdaq),
@@ -59,6 +130,7 @@ export const useCollection = async () => {
       ]);
 
       await Promise.all([
+        useHistory().nasdaqOneDayUpdate(newNasdaq),
         useHistory().nasdaqTwoDaysUpdate(newNasdaq),
         useHistory().nasdaqThreeDaysUpdate(newNasdaq),
         useHistory().nasdaqFourDaysUpdate(newNasdaq),
