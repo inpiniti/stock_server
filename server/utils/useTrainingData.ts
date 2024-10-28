@@ -1,5 +1,27 @@
 export type AgoType =
   | "h1"
+  | "h2"
+  | "h3"
+  | "h4"
+  | "h5"
+  | "h6"
+  | "h7"
+  | "h8"
+  | "h9"
+  | "h10"
+  | "h11"
+  | "h12"
+  | "h13"
+  | "h14"
+  | "h15"
+  | "h16"
+  | "h17"
+  | "h18"
+  | "h19"
+  | "h20"
+  | "h21"
+  | "h22"
+  | "h23"
   | "d1"
   | "d2"
   | "d3"
@@ -24,6 +46,28 @@ export type AgoType =
 
 const AgoTypeSeoulFiled: any = {
   h1: pgTableSeoul.change_1h,
+  h2: pgTableSeoul.change_2h,
+  h3: pgTableSeoul.change_3h,
+  h4: pgTableSeoul.change_4h,
+  h5: pgTableSeoul.change_5h,
+  h6: pgTableSeoul.change_6h,
+  h7: pgTableSeoul.change_7h,
+  h8: pgTableSeoul.change_8h,
+  h9: pgTableSeoul.change_9h,
+  h10: pgTableSeoul.change_10h,
+  h11: pgTableSeoul.change_11h,
+  h12: pgTableSeoul.change_12h,
+  h13: pgTableSeoul.change_13h,
+  h14: pgTableSeoul.change_14h,
+  h15: pgTableSeoul.change_15h,
+  h16: pgTableSeoul.change_16h,
+  h17: pgTableSeoul.change_17h,
+  h18: pgTableSeoul.change_18h,
+  h19: pgTableSeoul.change_19h,
+  h20: pgTableSeoul.change_20h,
+  h21: pgTableSeoul.change_21h,
+  h22: pgTableSeoul.change_22h,
+  h23: pgTableSeoul.change_23h,
   d1: pgTableSeoul.change_1d,
   d2: pgTableSeoul.change_2d,
   d3: pgTableSeoul.change_3d,
@@ -49,6 +93,28 @@ const AgoTypeSeoulFiled: any = {
 
 const AgoTypeKosdaqFiled: any = {
   h1: pgTableKosdaq.change_1h,
+  h2: pgTableKosdaq.change_2h,
+  h3: pgTableKosdaq.change_3h,
+  h4: pgTableKosdaq.change_4h,
+  h5: pgTableKosdaq.change_5h,
+  h6: pgTableKosdaq.change_6h,
+  h7: pgTableKosdaq.change_7h,
+  h8: pgTableKosdaq.change_8h,
+  h9: pgTableKosdaq.change_9h,
+  h10: pgTableKosdaq.change_10h,
+  h11: pgTableKosdaq.change_11h,
+  h12: pgTableKosdaq.change_12h,
+  h13: pgTableKosdaq.change_13h,
+  h14: pgTableKosdaq.change_14h,
+  h15: pgTableKosdaq.change_15h,
+  h16: pgTableKosdaq.change_16h,
+  h17: pgTableKosdaq.change_17h,
+  h18: pgTableKosdaq.change_18h,
+  h19: pgTableKosdaq.change_19h,
+  h20: pgTableKosdaq.change_20h,
+  h21: pgTableKosdaq.change_21h,
+  h22: pgTableKosdaq.change_22h,
+  h23: pgTableKosdaq.change_23h,
   d1: pgTableKosdaq.change_1d,
   d2: pgTableKosdaq.change_2d,
   d3: pgTableKosdaq.change_3d,
@@ -74,6 +140,28 @@ const AgoTypeKosdaqFiled: any = {
 
 const AgoTypeNasdaqFiled: any = {
   h1: pgTableNasdaq.change_1h,
+  h2: pgTableNasdaq.change_2h,
+  h3: pgTableNasdaq.change_3h,
+  h4: pgTableNasdaq.change_4h,
+  h5: pgTableNasdaq.change_5h,
+  h6: pgTableNasdaq.change_6h,
+  h7: pgTableNasdaq.change_7h,
+  h8: pgTableNasdaq.change_8h,
+  h9: pgTableNasdaq.change_9h,
+  h10: pgTableNasdaq.change_10h,
+  h11: pgTableNasdaq.change_11h,
+  h12: pgTableNasdaq.change_12h,
+  h13: pgTableNasdaq.change_13h,
+  h14: pgTableNasdaq.change_14h,
+  h15: pgTableNasdaq.change_15h,
+  h16: pgTableNasdaq.change_16h,
+  h17: pgTableNasdaq.change_17h,
+  h18: pgTableNasdaq.change_18h,
+  h19: pgTableNasdaq.change_19h,
+  h20: pgTableNasdaq.change_20h,
+  h21: pgTableNasdaq.change_21h,
+  h22: pgTableNasdaq.change_22h,
+  h23: pgTableNasdaq.change_23h,
   d1: pgTableNasdaq.change_1d,
   d2: pgTableNasdaq.change_2d,
   d3: pgTableNasdaq.change_3d,

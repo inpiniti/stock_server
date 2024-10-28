@@ -94,7 +94,7 @@ const updateByTimeFrame = async (
 
         let changeColumn;
         if (timeFrame === "hour") {
-          changeColumn = "change_1h";
+          changeColumn = `change_${daysAgo}h`;
         } else if (timeFrame === "day") {
           changeColumn = `change_${daysAgo}d`;
         } else if (timeFrame === "week") {
