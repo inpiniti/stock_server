@@ -19,7 +19,7 @@ const url = `postgres://${user}:${password}@${ip}:${port}/${database}`; //?sslmo
 
 let db: any;
 
-export const useGalaxy = () => {
+export const useDrizzle = () => {
   if (!db) {
     const queryClient = postgres(url);
     db = drizzle(queryClient);

@@ -190,13 +190,13 @@ import { eq, and, isNotNull } from "drizzle-orm";
 // Generic function to get sector data
 const getSectorData = async (ago: AgoType, sector: string) => {
   const [seoul, kosdaq, nasdaq] = await Promise.all([
-    useGalaxy()
+    useDrizzle()
       .select()
       .from(pgTableSeoul)
       .where(
         and(isNotNull(AgoTypeSeoulFiled[ago]), eq(pgTableSeoul.sector, sector))
       ),
-    useGalaxy()
+    useDrizzle()
       .select()
       .from(pgTableKosdaq)
       .where(
@@ -205,7 +205,7 @@ const getSectorData = async (ago: AgoType, sector: string) => {
           eq(pgTableKosdaq.sector, sector)
         )
       ),
-    useGalaxy()
+    useDrizzle()
       .select()
       .from(pgTableNasdaq)
       .where(
@@ -229,21 +229,21 @@ export const useTrainingData = () => {
     return [...seoul, ...kosdaq, ...nasdaq];
   };
   const getSoeul = async (ago: AgoType) => {
-    const query = useGalaxy()
+    const query = useDrizzle()
       .select()
       .from(pgTableSeoul)
       .where(isNotNull(AgoTypeSeoulFiled[ago]));
     return await query;
   };
   const getKosdaq = async (ago: AgoType) => {
-    const query = useGalaxy()
+    const query = useDrizzle()
       .select()
       .from(pgTableKosdaq)
       .where(isNotNull(AgoTypeKosdaqFiled[ago]));
     return await query;
   };
   const getNasdaq = async (ago: AgoType) => {
-    const query = useGalaxy()
+    const query = useDrizzle()
       .select()
       .from(pgTableNasdaq)
       .where(isNotNull(AgoTypeNasdaqFiled[ago]));

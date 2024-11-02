@@ -95,7 +95,7 @@ export const krCollectSave = async () => {
 
       // 분할된 데이터 삽입
       for (const chunk of dataChunks) {
-        //await useGalaxy().insert(pgTableKrSeoul).values(chunk);
+        //await useDrizzle().insert(pgTableKrSeoul).values(chunk);
         const { error } = await useSupabase().from("seoul").insert(chunk);
         if (error) {
           console.error("Error inserting data:", error);
@@ -111,7 +111,7 @@ export const krCollectSave = async () => {
 
       // 분할된 데이터 삽입
       for (const chunk of dataChunks) {
-        //await useGalaxy().insert(pgTableKrKosdaq).values(chunk);
+        //await useDrizzle().insert(pgTableKrKosdaq).values(chunk);
         const { error } = await useSupabase().from("kosdaq").insert(chunk);
         if (error) {
           console.error("Error inserting data:", error);

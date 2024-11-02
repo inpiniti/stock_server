@@ -1,5 +1,6 @@
 import * as tf from "@tensorflow/tfjs-node";
 import { pgAiModel } from "./pgAiModels";
+import { eq, and } from "drizzle-orm";
 
 export const useLearning = () => {
   const sectors = [
@@ -156,12 +157,70 @@ export const useLearning = () => {
     };
   };
 
+  // 예측을 위한 전처리 함수
+  const preprocessForPrediction = (data: any) => {
+    try {
+      const features: number[][] = []; // 특징
+
+      data.forEach((row: any) => {
+        // 사용할 필드 이름을 배열로 정의
+        const selectedFields = [
+          "operating_margin_ttm",
+          "relative_volume_10d_calc",
+          "enterprise_value_to_revenue_ttm",
+          "volatility_w",
+          "volatility_m",
+          "dividends_yield_current",
+          "gap",
+          "volume_change",
+          "pre_tax_margin_ttm",
+          "perf_1_y_market_cap",
+          "perf_w",
+          "perf_1_m",
+          "perf_3_m",
+          "perf_6_m",
+          "perf_y_t_d",
+          "perf_y",
+          "perf_5_y",
+          "perf_10_y",
+          "recommend_all",
+          "recommend_m_a",
+          "recommend_other",
+          "r_s_i",
+          "mom",
+          "c_c_i20",
+          "stoch_k",
+          "stoch_d",
+        ];
+
+        // 선택된 필드만 feature 배열에 추가합니다.
+        const feature = selectedFields.map((field) => {
+          const value = row[field];
+          // 숫자로 변환 가능한지 확인하고, 가능하면 변환합니다.
+          return isNaN(parseFloat(value)) ? 0 : parseFloat(value);
+        }) as number[];
+
+        // labelCallback이 필요 없는 경우, 이 부분은 제거하거나 주석 처리
+        // const label = labelCallback(row, dbFieldAgo);
+
+        features.push(feature);
+      });
+
+      return tf.tensor2d(features);
+    } catch (error) {
+      console.error("error017", error);
+      throw error;
+    }
+  };
+
+  // Binary 전처리
   const preprocess = (data: any, ago: AgoType) => {
     return preprocessCommon(data, ago, (row, dbFieldAgo) =>
       row[`change_${dbFieldAgo}`] > 0 ? 1 : 0
     );
   };
 
+  // Regression 전처리
   const preprocessWithOriginalLabel = (data: any, ago: AgoType) => {
     return preprocessCommon(data, ago, (row, dbFieldAgo) =>
       isNaN(parseFloat(row[`change_${dbFieldAgo}`]))
@@ -170,7 +229,7 @@ export const useLearning = () => {
     );
   };
 
-  // 훈련
+  // 훈련 Binary
   const trainBinary = async (features: any, labels: any) => {
     const model = tf.sequential();
     model.add(
@@ -198,7 +257,7 @@ export const useLearning = () => {
     return model;
   };
 
-  // 훈련2
+  // 훈련 Regression
   const trainRegression = async (features: any, labels: any) => {
     const model = tf.sequential();
     model.add(
@@ -226,6 +285,28 @@ export const useLearning = () => {
     return model;
   };
 
+  // 예측 Binary
+  const predictWithModel = async (model: tf.LayersModel, inputData: any) => {
+    try {
+      // 입력 데이터 확인
+      if (!inputData || inputData.length === 0) {
+        throw new Error("Input data is empty or undefined");
+      }
+
+      // 모델을 사용하여 예측
+      const predictions = model.predict(inputData) as tf.Tensor;
+
+      // 예측 결과를 배열로 변환
+      const predictedValues = await predictions.data();
+
+      // 예측 결과 반환
+      return Array.from(predictedValues);
+    } catch (error) {
+      console.error("error018", error);
+      throw error;
+    }
+  };
+
   // 모델을 JSON 형태로 직렬화하고 가중치를 직렬화하는 함수
   const serializeModel = async (model: any) => {
     if (model instanceof tf.LayersModel) {
@@ -245,15 +326,44 @@ export const useLearning = () => {
     return { modelJson, weightsJson };
   };
 
-  // 모델을 Supabase에 저장하는 함수
-  const saveModelToSupabase = async (
+  // 모델을 JSON 형태로 복원하고 가중치를 적용하는 함수
+  const deserializeModel = async (modelJson: any, weightsJson: any) => {
+    try {
+      // 모델 JSON을 기반으로 새로운 모델 생성
+      const model = await tf.models.modelFromJSON(modelJson);
+
+      // 가중치 복원
+      const weightsArray = proxyToObject(weightsJson);
+      const weights = weightsArray.map((weight: any, index: number) => {
+        const shape: any = model.weights[index].shape;
+
+        // weight 객체의 값을 배열로 변환
+        const weightValues = Object.values(weight).map((value) =>
+          Number(value)
+        );
+
+        return tf.tensor(weightValues, shape);
+      });
+
+      // 가중치 설정
+      model.setWeights(weights);
+
+      return model;
+    } catch (error) {
+      console.error("error016", error);
+      throw error;
+    }
+  };
+
+  // 모델을 Drizzle에 저장하는 함수
+  const saveModelToDrizzle = async (
     modelJson: any,
     weightsJson: any,
     sotckType: string,
     ago: AgoType,
     tableName: string
   ) => {
-    const { data, error } = await useGalaxy()
+    const { data, error } = await useDrizzle()
       .upsert(tableName)
       .values(
         {
@@ -281,6 +391,35 @@ export const useLearning = () => {
     }
   };
 
+  // 모델을 Drizzle에서 로드하는 함수
+  const loadModelFromDrizzle = async (
+    stockType: string,
+    ago: AgoType,
+    tableName: any
+  ) => {
+    try {
+      const data = await useDrizzle()
+        .select()
+        .from(tableName)
+        .where(
+          and(eq(tableName.market_sector, stockType), eq(tableName.ago, ago))
+        );
+
+      if (data && data.length > 0) {
+        //console.log(`Loaded model data from ${tableName}`, data);
+        return data[0]; // 필요한 데이터 반환
+      } else {
+        console.log(
+          `No model found in ${tableName} for ${stockType} and ${ago}`
+        );
+        return null; // 데이터가 없을 경우 null 반환
+      }
+    } catch (error) {
+      console.error("error015", error);
+      throw error;
+    }
+  };
+
   // 모델 저장 함수
   const save = async (
     model: any,
@@ -290,7 +429,7 @@ export const useLearning = () => {
   ) => {
     try {
       const { modelJson, weightsJson } = await serializeModel(model);
-      await saveModelToSupabase(
+      await saveModelToDrizzle(
         modelJson,
         weightsJson,
         sotckType,
@@ -405,6 +544,10 @@ export const useLearning = () => {
   return {
     runAllBinary,
     runAllRegression,
+    loadModelFromDrizzle,
+    deserializeModel,
+    predictWithModel,
+    preprocessForPrediction,
   };
 };
 

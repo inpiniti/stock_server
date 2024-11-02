@@ -10,14 +10,14 @@ export const seoul_live_save = async (data: any) => {
     const dataChunks = splitData(data, chunkSize);
 
     console.log("delete seoul_live");
-    const delete_data = await useGalaxy().delete(pgTableKrSeoulLive);
+    const delete_data = await useDrizzle().delete(pgTableKrSeoulLive);
     console.log("delete_data", delete_data);
     console.log("delete seoul_live");
 
     // 분할된 데이터 삽입
     for (const chunk of dataChunks) {
       console.log("insert seoul_live");
-      await useGalaxy().insert(pgTableKrSeoulLive).values(chunk);
+      await useDrizzle().insert(pgTableKrSeoulLive).values(chunk);
       console.log("insert seoul_live");
     }
 

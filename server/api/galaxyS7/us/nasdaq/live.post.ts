@@ -9,11 +9,11 @@ export const nasdaq_live_save = async (data: any) => {
     const chunkSize = Math.floor(65534 / firstRowParamCount); // 83은 각 행의 파라미터 수입니다.
     const dataChunks = splitData(data, chunkSize);
 
-    await useGalaxy().delete(pgTableUsNasdaqLive);
+    await useDrizzle().delete(pgTableUsNasdaqLive);
 
     // 분할된 데이터 삽입
     for (const chunk of dataChunks) {
-      await useGalaxy().insert(pgTableUsNasdaqLive).values(chunk);
+      await useDrizzle().insert(pgTableUsNasdaqLive).values(chunk);
     }
 
     return "success";

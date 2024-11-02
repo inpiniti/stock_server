@@ -5,7 +5,7 @@ const insertData = async (tableName: any, data: any) => {
   if (data.length == 0) return false;
   try {
     await processDataInsert(data, async (chunk: any[]) => {
-      await useGalaxy().insert(tableName).values(chunk);
+      await useDrizzle().insert(tableName).values(chunk);
     });
 
     return true;
@@ -45,7 +45,7 @@ const selectByTimeFrame = async (
                   FROM ${tableName}
                   WHERE DATE_TRUNC('${timeFrame}', ${tableName}.created_at) = DATE_TRUNC('${timeFrame}', NOW()${dateOffset})`;
   console.log("selectByTimeFrame", sqlStr);
-  return await useGalaxy().execute(sql.raw(sqlStr));
+  return await useDrizzle().execute(sql.raw(sqlStr));
 };
 
 // Abstracted update function
@@ -62,7 +62,7 @@ const updateByTimeFrame = async (
       `${daysAgo} ${timeFrame} 전 ${tableName} 데이터의 length`,
       prevList.length
     );
-    await useGalaxy().transaction(async (trx: any) => {
+    await useDrizzle().transaction(async (trx: any) => {
       for (const currentItem of currentList) {
         const prevItem = prevList.find(
           (prev: any) => prev.name == currentItem.name
@@ -79,6 +79,9 @@ const updateByTimeFrame = async (
             break;
           case "week":
             intervalUnit = "weeks";
+            break;
+          case "month":
+            intervalUnit = "months";
             break;
           case "year":
             intervalUnit = "years";
@@ -99,6 +102,8 @@ const updateByTimeFrame = async (
           changeColumn = `change_${daysAgo}d`;
         } else if (timeFrame === "week") {
           changeColumn = `change_${daysAgo}w`;
+        } else if (timeFrame === "month") {
+          changeColumn = `change_${daysAgo}m`;
         } else if (timeFrame === "year") {
           changeColumn = "change_1y";
         }

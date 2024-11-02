@@ -17,7 +17,7 @@ export const getStockInfo = async ({
   market: string;
 }) => {
   try {
-    const data = await useGalaxy()
+    const data = await useDrizzle()
       .select()
       .from(pgTableStockInfo)
       .where(

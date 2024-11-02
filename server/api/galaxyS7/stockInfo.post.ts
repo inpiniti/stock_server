@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
 
     // 삽입전에 기존 데이터 제거
     // country 가 KR 이고, market 이 Seoul 인 데이터만 제거
-    await useGalaxy()
+    await useDrizzle()
       .delete(pgTableStockInfo)
       .where(
         and(
@@ -36,7 +36,7 @@ export default defineEventHandler(async (event) => {
 
     // 분할된 데이터 삽입
     for (const chunk of dataChunks) {
-      await useGalaxy().insert(pgTableStockInfo).values(chunk);
+      await useDrizzle().insert(pgTableStockInfo).values(chunk);
     }
 
     return "success";

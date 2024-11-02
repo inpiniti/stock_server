@@ -61,7 +61,7 @@ export const usCollectSave = async () => {
 
       // 분할된 데이터 삽입
       for (const chunk of dataChunks) {
-        await useGalaxy().insert(pgTableUsNasdaq).values(chunk);
+        await useDrizzle().insert(pgTableUsNasdaq).values(chunk);
       }
     }
 
