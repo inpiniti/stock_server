@@ -1,13 +1,9 @@
 import { useScheduler } from "#scheduler";
 
 export default defineNitroPlugin(() => {
-  // 데이터 수집 여부 확인
-  const isDataCollection = process.env.DATA_COLLECTION === "true";
-
   console.log("env", process.env.NODE_ENV);
-  console.log("isDataCollection", isDataCollection);
-
-  if (process.env.NODE_ENV === "production" && isDataCollection) {
+  if (process.env.NODE_ENV == "production") {
+    console.log("startScheduler");
     startScheduler();
   }
 });
@@ -51,8 +47,7 @@ function startScheduler() {
   //       console.error(error);
   //     }
   //   })
-  //   .cron("0 18 * * *", "Asia/Seoul");
-  //   // 서울 시간대 기준 저녁 6시
+  //   .cron("0 18 * * *", "Asia/Seoul"); // 서울 시간대 기준 저녁 6시
 
   // scheduler
   //   .run(async () => {
@@ -64,6 +59,5 @@ function startScheduler() {
   //       console.error(error);
   //     }
   //   })
-  //   .cron("0 4 * * *", "Asia/Seoul");
-  //   // 서울 시간대 기준 새벽 4시
+  //   .cron("0 4 * * *", "Asia/Seoul"); // 서울 시간대 기준 새벽 4시
 }
